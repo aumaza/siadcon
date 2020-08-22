@@ -1,0 +1,10 @@
+#tabla usuarios
+create table usuarios (id int(11) auto_increment primary key, nombre varchar(30) binary not null, user varchar(15) binary not null, password varchar(10) binary not null, email varchar(90) not null, role int(1) default 1 not null)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#crear tabla contratos
+create table contratos(id int(11) auto_increment primari key, f_carga date not null, nombre, varchar(60) not null, nro_dni vatchar(11) not null, genero varchar(9) not null, escalafon varchar(10) not null, nivel varchar(6) not null, organismo varchar(90) not null, tipo_contrato varchar(30), monto float(8,2) not null, f_from date not null, f_to date not null, nro_gde varchar(40) not null, act_adm varchar(50) not null, file_path varchar(90) not null)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+#subir csv
+load data local infile '/var/www/htdocs/siadcon/sqls/contratos.csv' 
+into table contratos fields terminated by ',' enclosed by '"' lines terminated by '\r\n'
+(f_carga,nombre,nro_dni,genero,escalafon,nivel,organismo,tipo_contrato,monto,f_from,f_to,nro_gde,act_adm);
