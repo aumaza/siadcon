@@ -36,6 +36,108 @@ function skeleton(){
 }
 
 
+function editPassUser($id,$conn){
+
+$sql = "select * from usuarios where id = '$id'";
+      mysqli_select_db('siadcon');
+      $res = mysqli_query($conn,$sql);
+      $fila = mysqli_fetch_assoc($res);
+      
+
+      echo '<div class="container">
+	    <div class="row">
+	    <div class="col-sm-8">
+	      <h2>Cambiar Password</h2><hr>
+	      
+	      <form action="formUpdate.php" method="post">
+	      <input type="hidden" id="id" name="id" value="' . $fila['id'].'" />
+   
+         
+	  <div class="input-group">
+	    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+	    <input id="text" type="text" class="form-control" value="' . $fila['nombre'].'" name="nombre" value="" onkeyup="this.value=Text(this.value);" readonly required>
+	  </div>
+	
+	  <div class="input-group">
+	    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+	    <input id="text" type="text" class="form-control" name="user" onKeyDown="limitText(this,20);" onKeyUp="limitText(this,20);" value="' . $fila['user'].'" readonly required>
+	  </div>
+	  <div class="input-group">
+	    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+	    <input id="password" type="password" class="form-control" name="pass1" onKeyDown="limitText(this,15);" onKeyUp="limitText(this,15);" placeholder="Password" >
+	  </div>
+	  <div class="input-group">
+	    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+	    <input  type="password" class="form-control" name="pass2" onKeyDown="limitText(this,15);" onKeyUp="limitText(this,15);" placeholder="Repita Password" >
+	  </div>
+	  <br>
+	
+	<div class="form-group">
+	  <div class="col-sm-offset-2 col-sm-12" align="left">
+	  <button type="submit" class="btn btn-success" name="A"><span class="glyphicon glyphicon-pencil"></span>  Cambiar Password</button>
+	  <a href="../main/main.php"><input type="button" value="Volver al Menú Principal" class="btn btn-primary"></a>
+	  </div>
+	  </div>
+	</form> 
+	      
+	      </div>
+	      </div>
+	      </div>';
+
+}
+
+
+/*
+* Funcion para editar la contraseña de los usuarios al sistema
+*/
+
+function updatePass($id,$pass1,$pass2,$conn){
+
+	
+
+    	$sql = "UPDATE usuarios set password = '$pass1' WHERE id = '$id'";
+    	mysqli_select_db('siadcon');
+    	
+    	
+    	if(strcmp($pass2, $pass1) == 0){
+    		
+		      mysqli_query($conn,$sql);
+			echo "<br>";
+			echo '<div class="section"><br>
+			      <div class="container">
+			      <div class="row">
+			      <div class="col-md-12">';
+			echo '<div class="alert alert-success" role="alert">';
+			echo 'Password Actualizado Satisfactoriamente<br>';
+			echo 'Aguarde un Instante que será redirigido';
+			echo "</div>";
+			echo "</div>";
+			echo "</div>";
+			echo "</div>";
+			echo "</div>";
+			echo '<meta http-equiv="refresh" content="4;URL=../main/main.php "/>';
+			
+	   	}else{
+			echo "<br>";
+			echo '<div class="section"><br>
+			      <div class="container">
+			      <div class="row">
+			      <div class="col-md-12">';
+			echo '<div class="alert alert-danger" role="alert">';
+			echo "Las Contraseñas no Coinciden. Intente Nuevamente!<br>";
+			echo 'Aguarde un instante que será redirigido';
+			echo "</div>";
+			echo "</div>";
+			echo "</div>";
+			echo "</div>";
+			echo "</div>";
+			echo '<meta http-equiv="refresh" content="4;URL=../main/main.php "/>';
+
+    	}
+   
+}
+
+
 function contratos($conn,$varsession){
 
 if($conn)
@@ -341,7 +443,7 @@ if($conn)
 			 echo "<td align=center>".$fila['nombre']."</td>";
 			 echo "<td align=center>".$fila['user']."</td>";
 			 echo "<td class='text-nowrap'>";
-			 echo '<a href="../usuario/editar.php?id='.$fila['id'].'" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil"></span> Cambiar Password</a>';
+			 echo '<a href="../usuarios/editar.php?id='.$fila['id'].'" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil"></span> Cambiar Password</a>';
 			 echo "</td>";
 			 $count++;
 		}
