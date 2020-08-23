@@ -191,7 +191,7 @@ if($conn)
 			 echo "<td align=center>".$fila['act_adm']."</td>";
 			 echo "<td align=center>".$fila['file_name']."</td>";
 			 echo "<td class='text-nowrap'>";
-			 echo '<a href="../contratos/editar.php?id='.$fila['id'].'" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil"></span> Editar</a><br>';
+			 echo '<a href="../contratos/editar.php?id='.$fila['id'].'" class="btn btn-primary btn-sm " ><span class="glyphicon glyphicon-pencil"></span> Editar</a><br>';
 			 echo '<a href="#" data-href="../contratos/eliminar.php?id='.$fila['id'].'" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span> Borrar</a><br>';
 			 echo '<a href="../contratos/upload.php?id='.$fila['id'].'" class="btn btn-warning btn-sm"><span class="glyphicon glyphicon-cloud-upload"></span> PDF</a><br>';
 			 echo '<a href="../contratos/download.php?file_name='.$fila['file_name'].'" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-cloud-download"></span> PDF</a>';

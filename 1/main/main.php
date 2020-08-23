@@ -175,6 +175,7 @@ function Text(string){//validacion solo letras
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
       <button class="btn btn-default navbar-btn"><img class="img-reponsive img-rounded" src="../../icons/apps/clock.png" /> <?php echo "<strong>Hora Actual:</strong> " . date("H:i"); ?></button>
+      <?php setlocale(LC_ALL,"es_ES"); ?>
       <button class="btn btn-default navbar-btn"><img class="img-reponsive img-rounded" src="../../icons/actions/view-calendar-day.png" /> <?php echo "<strong>Fecha Actual:</strong> ". strftime("%d de %b de %Y"); ?></button>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -190,8 +191,9 @@ function Text(string){//validacion solo letras
       <form action="main.php" method="POST">
 	<button type="submit" class="btn btn-default btn-sm" name="A"><img class="img-reponsive img-rounded" src="../../icons/apps/accessories-text-editor.png" /> + Contrato</button><hr>
 	<button type="submit" class="btn btn-default btn-sm" name="B"><img class="img-reponsive img-rounded" src="../../icons/apps/preferences-contact-list.png" /> Contratos</button><hr>
-	<button type="submit" class="btn btn-default btn-sm" name="C"><img class="img-reponsive img-rounded" src="../../icons/actions/user-group-properties.png" /> Mis Datos</button>
+	<button type="submit" class="btn btn-default btn-sm" name="C"><img class="img-reponsive img-rounded" src="../../icons/actions/user-group-properties.png" /> Mis Datos</button><hr>
 	</form>
+	<a href="../informes/informes.php"><button type="button" class="btn btn-default btn-sm"><img class="img-reponsive img-rounded" src="../../icons/actions/view-calendar-tasks.png" /> Informes</button></a>
     </div>
     <div class="col-sm-10 text-left"> 
       <h1>Bienvenido/a <?php echo $nombre ?></p></h1>
