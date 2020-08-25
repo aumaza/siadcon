@@ -75,6 +75,12 @@
   <?php skeleton(); ?>
   
   <style>
+  
+    body{
+    background: #BE93C5;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #7BC6CC, #BE93C5);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #7BC6CC, #BE93C5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    }
     /* Remove the navbar's default rounded borders and increase the bottom margin */ 
     .navbar {
       margin-bottom: 50px;
@@ -88,9 +94,10 @@
    
     /* Add a gray background color and some padding to the footer */
     footer {
-      background-color: #f2f2f2;
-      padding: 25px;
-    }
+      background-color: #555;
+      color: white;
+      padding: 15px;
+      }
   </style>
 </head>
 <body>
@@ -435,7 +442,7 @@ var myChart = new Chart(ctx, {
 <!-- end tercer bloque -->  
 
 <footer class="container-fluid text-center">
-  <p>Ministerio de Economia - Dirección de Presupuesto y Evaluación de Gastos en Personal</p>  
+  <p>Ministerio de Economia de la Nación - Dirección de Presupuesto y Evaluación de Gastos en Personal</p>  
 </footer>
 
 
