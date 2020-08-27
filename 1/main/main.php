@@ -225,7 +225,7 @@ function Text(string){//validacion solo letras
 </div>
 
 <footer class="container-fluid text-center">
-  <p>Ministerio de Economía de la Nación - Dirección de Presupuesto y Evaluación Presupuestaria</p>
+  <p><img class="img-reponsive img-rounded" src="../../img/escudo32x32.png" /> Ministerio de Economía de la Nación - Dirección de Presupuesto y Evaluación de Gastos en Personal</p>
 </footer>
 
 <!-- Modal -->

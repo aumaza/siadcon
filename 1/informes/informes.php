@@ -98,6 +98,15 @@
       color: white;
       padding: 15px;
       }
+      .affix {
+    top: 0;
+    width: 100%;
+    z-index: 9999 !important;
+  }
+
+  .affix + .container-fluid {
+    padding-top: 70px;
+  }
   </style>
 </head>
 <body>
@@ -109,7 +118,7 @@
   </div>
 </div>
 
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
@@ -117,18 +126,14 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>                        
       </button>
-      <a class="navbar-brand" href="#"><span class="glyphicon glyphicon-list-alt"></span> Informes</a>
+   
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-        <li class="active"><a href="#">Home</a></li>
-        <li><a href="#">Products</a></li>
-        <li><a href="#">Deals</a></li>
-        <li><a href="#">Stores</a></li>
-        <li><a href="#">Contact</a></li>
-      </ul>
+      <a href="../main/main.php"><button class="btn btn-default navbar-btn"><img class="img-reponsive img-rounded" src="../../icons/actions/go-home.png" /> Home</button></a>
+        </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><a href="../main/main.php"><span class="glyphicon glyphicon-chevron-left"></span> Volver</a></li>
+        <button class="btn btn-default navbar-btn"><img class="img-reponsive img-rounded" src="../../icons/actions/meeting-attending.png" /> <?php echo "<strong>Usuario:</strong> " . $nombre; ?></button>
        </ul>
     </div>
   </div>
@@ -138,7 +143,7 @@
 <div class="container">    
   <div class="row">
     <div class="col-sm-6">
-      <div class="panel panel-primary">
+      <div class="panel panel-default">
         <div class="panel-heading">Cantidad de Mujeres Contratadas</div>
          <div class="panel-body"><canvas id="myChart" width="600" height="600"></canvas>
 <script>
@@ -182,12 +187,14 @@ var myChart = new Chart(ctx, {
 </script>   
   </div>
        
-        <div class="panel-footer">Contratos Mujeres: <?php echo $mujeres; ?></div>
+        <div class="panel-footer">
+        <a href="../informes/informes.php"><button type="button" class="btn btn-default btn-sm"><img class="img-reponsive img-rounded" src="../../icons/devices/printer.png" /> Imprimir Informe</button></a>
+        </div>
       </div>
     </div>
     
     <div class="col-sm-6"> 
-      <div class="panel panel-primary">
+      <div class="panel panel-default">
         <div class="panel-heading">Cantidad de Hombres Contratados</div>
          <div class="panel-body"><canvas id="myChart1" width="600" height="600"></canvas>
 <script>
@@ -220,7 +227,9 @@ var myChart = new Chart(ctx, {
 });
 </script>   
   </div>
-         <div class="panel-footer">Contratos Hombres: <?php echo $hombres; ?></div>
+         <div class="panel-footer">
+         <a href="../informes/informes.php"><button type="button" class="btn btn-default btn-sm"><img class="img-reponsive img-rounded" src="../../icons/devices/printer.png" /> Imprimir Informe</button></a>
+         </div>
       </div>
     </div>
     </div>
@@ -231,7 +240,7 @@ var myChart = new Chart(ctx, {
    <div class="container">
    <div class="row">
    <div class="col-sm-6"> 
-      <div class="panel panel-primary">
+      <div class="panel panel-default">
         <div class="panel-heading">Comparativa Hombres/Mujeres</div>
              <div class="panel-body"><canvas id="myChart2" width="600" height="600"></canvas>
 <script>
@@ -274,14 +283,15 @@ var myChart = new Chart(ctx, {
 });
 </script>   
   </div>
-        <?php $total = $mujeres + $hombres; ?>
-        <div class="panel-footer">Total: <?php echo $total; ?></div>
+       <div class="panel-footer">
+       <a href="../informes/informes.php"><button type="button" class="btn btn-default btn-sm"><img class="img-reponsive img-rounded" src="../../icons/devices/printer.png" /> Imprimir Informe</button></a>
+       </div>
       </div>
     </div>
      
   
     <div class="col-sm-6">
-      <div class="panel panel-primary">
+      <div class="panel panel-default">
         <div class="panel-heading">Cantidad Contratos Mujeres por Organismo</div>
        
         <div class="panel-body"><canvas id="myChart3" width="600" height="600"></canvas>
@@ -326,7 +336,9 @@ var myChart = new Chart(ctx, {
 </script>    
 </div>
      
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+        <div class="panel-footer">
+        <a href="../informes/informes.php"><button type="button" class="btn btn-default btn-sm"><img class="img-reponsive img-rounded" src="../../icons/devices/printer.png" /> Imprimir Informe</button></a>
+        </div>
       </div>
     </div>
     </div>
@@ -338,7 +350,7 @@ var myChart = new Chart(ctx, {
    <div class="container">
    <div class="row">
    <div class="col-sm-6"> 
-      <div class="panel panel-primary">
+      <div class="panel panel-default">
         <div class="panel-heading">Cantidad Contratos Hombres por Organismo</div>
              <div class="panel-body"><canvas id="myChart4" width="600" height="600"></canvas>
 <script>
@@ -381,14 +393,15 @@ var myChart = new Chart(ctx, {
 });
 </script>   
   </div>
-        <?php $total = $mujeres + $hombres; ?>
-        <div class="panel-footer">Total: <?php echo $total; ?></div>
+       <div class="panel-footer">
+       <a href="../informes/informes.php"><button type="button" class="btn btn-default btn-sm"><img class="img-reponsive img-rounded" src="../../icons/devices/printer.png" /> Imprimir Informe</button></a>
+       </div>
       </div>
     </div>
      
   
     <div class="col-sm-6">
-      <div class="panel panel-primary">
+      <div class="panel panel-default">
         <div class="panel-heading">Cantidad Contratos Mujeres por Organismo</div>
        
         <div class="panel-body"><canvas id="myChart5" width="600" height="600"></canvas>
@@ -433,7 +446,9 @@ var myChart = new Chart(ctx, {
 </script>    
 </div>
      
-        <div class="panel-footer">Buy 50 mobiles and get a gift card</div>
+        <div class="panel-footer">
+        <a href="../informes/informes.php"><button type="button" class="btn btn-default btn-sm"><img class="img-reponsive img-rounded" src="../../icons/devices/printer.png" /> Imprimir Informe</button></a>
+        </div>
       </div>
     </div>
     </div>
@@ -442,7 +457,7 @@ var myChart = new Chart(ctx, {
 <!-- end tercer bloque -->  
 
 <footer class="container-fluid text-center">
-  <p>Ministerio de Economia de la Nación - Dirección de Presupuesto y Evaluación de Gastos en Personal</p>  
+  <p><img class="img-reponsive img-rounded" src="../../img/escudo32x32.png" /> Ministerio de Economia de la Nación - Dirección de Presupuesto y Evaluación de Gastos en Personal</p>  
 </footer>
 
 
