@@ -62,6 +62,17 @@
 	$labels1 = json_encode($label1);
 	$data1 = json_encode($genre1);
 	
+	//cantidad de contratos por organismo
+	$consql = "select organismo, count(organismo) as cant from contratos group by organismo";
+	mysqli_select_db('siadcon');
+	$resval = mysqli_query($conn, $consql);
+	while($fila = mysqli_fetch_array($resval)){
+	     $label2[] = $fila['organismo'];
+	     $cant[] = $fila['cant'];
+	}
+	$labels2 = json_encode($label2);
+	$data2 = json_encode($cant);
+	
 ?>
 
 
@@ -73,6 +84,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/png" href="../../icons/places/folder-bookmark.png" />
   <?php skeleton(); ?>
+  
+  <script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>
   
   <style>
   
@@ -130,10 +147,10 @@
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav">
-      <a href="../main/main.php"><button class="btn btn-default navbar-btn"><img class="img-reponsive img-rounded" src="../../icons/actions/go-home.png" /> Home</button></a>
+      <a href="../main/main.php" data-toggle="tooltip" title="Volver al Menú Principal"><button class="btn btn-default navbar-btn"><img class="img-reponsive img-rounded" src="../../icons/actions/go-home.png" /> Home</button></a>
         </ul>
       <ul class="nav navbar-nav navbar-right">
-        <button class="btn btn-default navbar-btn"><img class="img-reponsive img-rounded" src="../../icons/actions/meeting-attending.png" /> <?php echo "<strong>Usuario:</strong> " . $nombre; ?></button>
+        <a href="#" data-toggle="tooltip" title="<?php echo 'Nombre: ' .$nombre. '   '. 'Usuario: ' .$_SESSION['user']; ?>"><button class="btn btn-default navbar-btn"><img class="img-reponsive img-rounded" src="../../icons/actions/meeting-attending.png" /> <?php echo "<strong>Usuario:</strong> " . $nombre; ?></button></a>
        </ul>
     </div>
   </div>
@@ -228,7 +245,7 @@ var myChart = new Chart(ctx, {
 </script>   
   </div>
          <div class="panel-footer">
-         <a href="../informes/informes.php"><button type="button" class="btn btn-default btn-sm"><img class="img-reponsive img-rounded" src="../../icons/devices/printer.png" /> Imprimir Informe</button></a>
+         <a href="#"><button type="button" class="btn btn-default btn-sm"><img class="img-reponsive img-rounded" src="../../icons/devices/printer.png" /> Imprimir Informe</button></a>
          </div>
       </div>
     </div>
@@ -284,7 +301,7 @@ var myChart = new Chart(ctx, {
 </script>   
   </div>
        <div class="panel-footer">
-       <a href="../informes/informes.php"><button type="button" class="btn btn-default btn-sm"><img class="img-reponsive img-rounded" src="../../icons/devices/printer.png" /> Imprimir Informe</button></a>
+       <a href="../informes/print.php?file=informe_3.php" target="blank"><button type="button" class="btn btn-default btn-sm"><img class="img-reponsive img-rounded" src="../../icons/devices/printer.png" /> Imprimir Informe</button></a>
        </div>
       </div>
     </div>
@@ -337,7 +354,7 @@ var myChart = new Chart(ctx, {
 </div>
      
         <div class="panel-footer">
-        <a href="../informes/informes.php"><button type="button" class="btn btn-default btn-sm"><img class="img-reponsive img-rounded" src="../../icons/devices/printer.png" /> Imprimir Informe</button></a>
+        <a href="../informes/print.php?file=informe_4.php" target="blank"><button type="button" class="btn btn-default btn-sm"><img class="img-reponsive img-rounded" src="../../icons/devices/printer.png" /> Imprimir Informe</button></a>
         </div>
       </div>
     </div>
@@ -394,7 +411,7 @@ var myChart = new Chart(ctx, {
 </script>   
   </div>
        <div class="panel-footer">
-       <a href="../informes/informes.php"><button type="button" class="btn btn-default btn-sm"><img class="img-reponsive img-rounded" src="../../icons/devices/printer.png" /> Imprimir Informe</button></a>
+       <a href="../informes/print.php?file=informe_5.php" target="blank"><button type="button" class="btn btn-default btn-sm"><img class="img-reponsive img-rounded" src="../../icons/devices/printer.png" /> Imprimir Informe</button></a>
        </div>
       </div>
     </div>
@@ -402,7 +419,7 @@ var myChart = new Chart(ctx, {
   
     <div class="col-sm-6">
       <div class="panel panel-default">
-        <div class="panel-heading">Cantidad Contratos Mujeres por Organismo</div>
+        <div class="panel-heading">Cantidad Contratos por Organismos</div>
        
         <div class="panel-body"><canvas id="myChart5" width="600" height="600"></canvas>
        <script>
@@ -410,10 +427,10 @@ var myChart = new Chart(ctx, {
 	var myChart = new Chart(ctx, {
     type: 'bar',
     data: {
-        labels: <?php echo $labels; ?>,
+        labels: <?php echo $labels2; ?>,
         datasets: [{
             label: ['Cantidad'],
-            data: <?php echo $data; ?>,
+            data: <?php echo $data2; ?>,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -447,7 +464,7 @@ var myChart = new Chart(ctx, {
 </div>
      
         <div class="panel-footer">
-        <a href="../informes/informes.php"><button type="button" class="btn btn-default btn-sm"><img class="img-reponsive img-rounded" src="../../icons/devices/printer.png" /> Imprimir Informe</button></a>
+        <a href="../informes/print.php?file=informe_6.php" target="blank"><button type="button" class="btn btn-default btn-sm"><img class="img-reponsive img-rounded" src="../../icons/devices/printer.png" /> Imprimir Informe</button></a>
         </div>
       </div>
     </div>

@@ -299,13 +299,15 @@ if($conn){
                     <th class='text-nowrap text-center'>Escalafón</th>
                     <th class='text-nowrap text-center'>Nivel</th>
                     <th class='text-nowrap text-center'>Organismo</th>
-                    <th class='text-nowrap text-center'>Tipo Contrato</th>
+                    <th class='text-nowrap text-center'>Normativa</th>
+                    <th class='text-nowrap text-center'>Excepción</th>
                     <th class='text-nowrap text-center'>Monto</th>
                     <th class='text-nowrap text-center'>Desde</th>
                     <th class='text-nowrap text-center'>Hasta</th>
                     <th class='text-nowrap text-center'>GDE</th>
                     <th class='text-nowrap text-center'>Act. Adm.</th>
                     <th class='text-nowrap text-center'>Archivo</th>
+                    <th class='text-nowrap text-center'>Observaciones</th>
                     <th>&nbsp;</th>
                     </thead>";
 
@@ -322,12 +324,14 @@ if($conn){
 			 echo "<td align=center>".$fila['nivel']."</td>";
 			 echo "<td align=center>".$fila['organismo']."</td>";
 			 echo "<td align=center>".$fila['tipo_contrato']."</td>";
+			 echo "<td align=center>".$fila['excepcion']."</td>";
 			 echo "<td align=center>".$fila['monto']."</td>";
 			 echo "<td align=center>".$fila['f_from']."</td>";
 			 echo "<td align=center>".$fila['f_to']."</td>";
 			 echo "<td align=center>".$fila['nro_gde']."</td>";
 			 echo "<td align=center>".$fila['act_adm']."</td>";
 			 echo "<td align=center>".$fila['file_name']."</td>";
+			 echo "<td align=center>".$fila['observaciones']."</td>";
 			 echo "<td class='text-nowrap'>";
 			 echo '<a href="../contratos/editar.php?id='.$fila['id'].'" class="btn btn-primary btn-sm " ><span class="glyphicon glyphicon-pencil"></span> Editar</a><br>';
 			 echo '<a href="#" data-href="../contratos/eliminar.php?id='.$fila['id'].'" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span> Borrar</a><br>';
@@ -390,9 +394,18 @@ function newContract(){
 		  <input type="text" class="form-control" id="organismo" name="organismo" onkeyup="this.value=Text(this.value);" onKeyDown="limitText(this,60);" onKeyUp="limitText(this,60);" required>
 		</div>
 		<div class="form-group">
-		  <label for="pwd">Tipo Contrato:</label>
+		  <label for="pwd">Normativa:</label>
 		  <input type="text" class="form-control" id="tipo_contrato" name="tipo_contrato"  onKeyDown="limitText(this,25);" onKeyUp="limitText(this,25);" required>
-		</div>
+		</div><hr>
+		<div class="form-group">
+		  <label for="pwd">Excepción</label><br>
+		<div class="checkbox">
+		    <label><input type="checkbox" name="excepcion" value="Si"> Si</label>
+		  </div>
+		  <div class="checkbox">
+		    <label><input type="checkbox" name="excepcion" value="No"> No</label>
+		  </div><hr>
+		  </div>
 		<div class="form-group">
 		  <label for="pwd">Monto:</label>
 		  <input type="text" class="form-control" id="monto" name="monto" onkeyup="this.value=Numeros(this.value);" onKeyDown="limitText(this,6);" onKeyUp="limitText(this,6);" required>
@@ -413,8 +426,12 @@ function newContract(){
 		  <label for="pwd">Acto Administrativo:</label>
 		  <input type="text" class="form-control" id="act_adm" name="act_adm" onKeyDown="limitText(this,80);" onKeyUp="limitText(this,80);" required>
 		</div>
+		<div class="form-group">
+		  <label for="pwd">Observaciones:</label>
+		  <textarea class="form-control" id="observaciones" name="observaciones" onKeyDown="limitText(this,120);" onKeyUp="limitText(this,12080);" required></textarea>
+		</div>
 		
-		<button type="submit" class="btn btn-success btn-block" name="A">Agregar</button>
+		<button type="submit" class="btn btn-success btn-block" name="A"><img src="../../icons/devices/media-floppy.png"  class="img-reponsive img-rounded"> Guardar</button>
 	      </form> <br>
 	      
 	    </div>
@@ -433,7 +450,8 @@ function editContract($id,$conn){
       mysqli_select_db('siadcon');
       $res = mysqli_query($conn,$sql);
       $fila = mysqli_fetch_assoc($res);
-
+      
+	
       echo '<div class="container">
 	    <div class="row">
 	    <div class="col-sm-8">
@@ -465,8 +483,12 @@ function editContract($id,$conn){
 		  <input type="text" class="form-control" id="organismo" name="organismo" value="'.$fila['organismo'].'" onkeyup="this.value=Text(this.value);" onKeyDown="limitText(this,60);" onKeyUp="limitText(this,60);" required>
 		</div>
 		<div class="form-group">
-		  <label for="pwd">Tipo Contrato:</label>
+		  <label for="pwd">Normativa:</label>
 		  <input type="text" class="form-control" id="tipo_contrato" name="tipo_contrato" value="'.$fila['tipo_contrato'].'" onKeyDown="limitText(this,25);" onKeyUp="limitText(this,25);" required>
+		</div>
+		<div class="form-group">
+		  <label for="pwd">Excepción:</label>
+		  <input type="text" class="form-control" id="excepcion" name="excepcion" value="'.$fila['excepcion'].'" onKeyDown="limitText(this,2);" onKeyUp="limitText(this,2);" required>
 		</div>
 		<div class="form-group">
 		  <label for="pwd">Monto:</label>
@@ -488,10 +510,14 @@ function editContract($id,$conn){
 		  <label for="pwd">Acto Administrativo:</label>
 		  <input type="text" class="form-control" id="act_adm" name="act_adm" value="'.$fila['act_adm'].'" onKeyDown="limitText(this,80);" onKeyUp="limitText(this,80);" required>
 		</div>
+		<div class="form-group">
+		  <label for="pwd">Observaciones:</label>
+		  <textarea class="form-control" id="observaciones" name="observaciones"  onKeyDown="limitText(this,120);" onKeyUp="limitText(this,12080);" required>'.$fila['observaciones'].'</textarea>
+		</div>
 		
-		<button type="submit" class="btn btn-success btn-block" name="A">Editar</button>
+		<button type="submit" class="btn btn-success btn-block" name="A"><img src="../../icons/devices/media-floppy.png"  class="img-reponsive img-rounded"> Guardar</button>
 		</form>
-	      <a href="../main/main.php"><button class="btn btn-primary btn-block">Volver</button></a>
+	      <a href="../main/main.php"><button class="btn btn-primary btn-block"><img src="../../icons/actions/arrow-left.png"  class="img-reponsive img-rounded"> Volver</button></a>
 	      
 	    </div>
 	    </div>
@@ -500,12 +526,12 @@ function editContract($id,$conn){
 }
 
 
-function updateContract($id,$nombre,$nro_dni,$genero,$escalafon,$nivel,$organismo,$tipo_contrato,$monto,$f_from,$f_to,$nro_gde,$act_adm,$conn){
+function updateContract($id,$nombre,$nro_dni,$genero,$escalafon,$nivel,$organismo,$tipo_contrato,$excepcion,$monto,$f_from,$f_to,$nro_gde,$act_adm,$obs,$conn){
 
 		
 	mysqli_select_db('siadcon');
 	$sqlInsert = "update contratos set nombre = '$nombre', nro_dni = '$nro_dni', genero = '$genero', escalafon = '$escalafon', nivel = '$nivel', organismo = '$organismo',
-	tipo_contrato = '$tipo_contrato', monto = '$monto', f_from = '$f_from', f_to = '$f_to', nro_gde = '$nro_gde' where id = '$id'";
+	tipo_contrato = '$tipo_contrato', excepcion = '$excepcion', monto = '$monto', f_from = '$f_from', f_to = '$f_to', nro_gde = '$nro_gde', observaciones = '$obs' where id = '$id'";
            
 	$res = mysqli_query($conn,$sqlInsert);
 
@@ -675,14 +701,14 @@ if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])){
 }
 
 
-function addContract($nombre,$nro_dni,$genero,$escalafon,$nivel,$organismo,$tipo_contrato,$monto,$f_from,$f_to,$nro_gde,$act_adm,$conn){
+function addContract($nombre,$nro_dni,$genero,$escalafon,$nivel,$organismo,$tipo_contrato,$excepcion,$monto,$f_from,$f_to,$nro_gde,$act_adm,$obs,$conn){
 
 		
 	mysqli_select_db('siadcon');
 	$sqlInsert = "INSERT INTO contratos ".
-		"(f_carga,nombre,nro_dni,genero,escalafon,nivel,organismo,tipo_contrato,monto,f_from,f_to,nro_gde,act_adm)".
+		"(f_carga,nombre,nro_dni,genero,escalafon,nivel,organismo,tipo_contrato,excepcion,f_from,f_to,nro_gde,act_adm,observaciones)".
 		"VALUES ".
-      "(NOW(),'$nombre','$nro_dni','$genero','$escalafon','$nivel','$organismo','$tipo_contrato','$monto','$f_from','$f_to','$nro_gde', '$act_adm')";
+      "(NOW(),'$nombre','$nro_dni','$genero','$escalafon','$nivel','$organismo','$tipo_contrato','$excepcion','$monto','$f_from','$f_to','$nro_gde', '$act_adm','$obs')";
            
 	$res = mysqli_query($conn,$sqlInsert);
 

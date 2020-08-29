@@ -68,13 +68,15 @@
                             $organismo = mysqli_real_escape_string($conn,$_POST["organismo"]);
                             $organismo = strtoupper($organismo);
                             $tipo_contrato = mysqli_real_escape_string($conn,$_POST["tipo_contrato"]);
+                            $excepcion = mysqli_real_escape_string($conn,$_POST["excepcion"]);
                             $monto = mysqli_real_escape_string($conn,$_POST["monto"]);
                             $f_from = mysqli_real_escape_string($conn,$_POST["f_from"]);
                             $f_to = mysqli_real_escape_string($conn,$_POST["f_to"]);
                             $nro_gde = mysqli_real_escape_string($conn,$_POST["gde"]);
                             $act_adm = mysqli_real_escape_string($conn,$_POST["act_adm"]);
+                            $obs = mysqli_real_escape_string($conn,$_POST["observaciones"]);
                                                         
-                             updateContract($id,$nombre,$nro_dni,$genero,$escalafon,$nivel,$organismo,$tipo_contrato,$monto,$f_from,$f_to,$nro_gde,$act_adm,$conn);
+                             updateContract($id,$nombre,$nro_dni,$genero,$escalafon,$nivel,$organismo,$tipo_contrato,$excepcion,$monto,$f_from,$f_to,$nro_gde,$act_adm,$obs,$conn);
                             }
                             }else{
 			      mysqli_error($conn);

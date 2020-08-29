@@ -131,7 +131,7 @@ function Text(string){//validacion solo letras
 
 <div class="panel panel-info" >
   <div class="panel-heading">
-    <h2 class="panel-title text-center text-default "><span class="pull-center "><img src="../../icons/actions/user-group-new.png"  class="img-reponsive img-rounded"> Editar Usuario</h2>
+    <h2 class="panel-title text-center text-default "><span class="pull-center "><img src="../../icons/apps/accessories-text-editor.png"  class="img-reponsive img-rounded"> Editar Contrato</h2>
   </div>
     <div class="panel-body">
     
