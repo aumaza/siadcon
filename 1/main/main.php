@@ -203,7 +203,8 @@ $(document).ready(function(){
     </div>
     <div class="col-sm-10 text-left"> 
       <h1>Bienvenido/a <?php echo $nombre ?></p></h1>
-      <p>Siadcon - Sistema de Administración de Contratos</p>
+      <a href="main.php" data-toggle="tooltip" data-placement="right" title="Sistema de Administración de Contratos"><button type="button" class="btn btn-default"><img class="img-reponsive img-rounded" src="../../icons/actions/go-home.png" /> Siadcon</button></a><br>
+      <hr>
       <hr>
       
       <?php

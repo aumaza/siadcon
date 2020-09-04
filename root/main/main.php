@@ -115,6 +115,12 @@ function Text(string){//validacion solo letras
     return out;
 }
 </script>
+
+    <script>
+$(document).ready(function(){
+  $('[data-toggle="tooltip"]').tooltip();   
+});
+</script>
   
   
   <style>
@@ -179,7 +185,7 @@ function Text(string){//validacion solo letras
       <button class="btn btn-default navbar-btn"><img class="img-reponsive img-rounded" src="../../icons/actions/view-calendar-day.png" /> <?php echo "<strong>Fecha Actual:</strong> ". strftime("%d de %b de %Y"); ?></button>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <a href="../../logout.php"> <button class="btn btn-danger navbar-btn"><img class="img-reponsive img-rounded" src="../../icons/actions/go-previous-view.png" /> Salir</button></a>
+        <a href="../../logout.php" data-toggle="tooltip" data-placement="bottom" title="Cerrar Cesión"> <button class="btn btn-danger navbar-btn"><img class="img-reponsive img-rounded" src="../../icons/actions/go-previous-view.png" /> Salir</button></a>
       </ul>
     </div>
   </div>
@@ -189,15 +195,15 @@ function Text(string){//validacion solo letras
   <div class="row content">
     <div class="col-sm-2 sidenav">
       <form action="main.php" method="POST">
-	<button type="submit" class="btn btn-default btn-sm" name="A"><img class="img-reponsive img-rounded" src="../../icons/apps/accessories-text-editor.png" /> + Contrato</button><hr>
-	<button type="submit" class="btn btn-default btn-sm" name="B"><img class="img-reponsive img-rounded" src="../../icons/apps/preferences-contact-list.png" /> Contratos</button><hr>
-	<button type="submit" class="btn btn-default btn-sm" name="C"><img class="img-reponsive img-rounded" src="../../icons/actions/user-group-properties.png" /> Mis Datos</button><hr>
-	<button type="submit" class="btn btn-default btn-sm" name="D"><img class="img-reponsive img-rounded" src="../../icons/actions/user-group-properties.png" /> Usuarios</button>
+	 <a href="#" data-toggle="tooltip" data-placement="right" title="Nuevo Registro"><button type="submit" class="btn btn-default btn-sm" name="A"><img class="img-reponsive img-rounded" src="../../icons/apps/accessories-text-editor.png" /> + Contrato</button></a><hr>
+	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Listar Contratos"><button type="submit" class="btn btn-default btn-sm" name="B"><img class="img-reponsive img-rounded" src="../../icons/apps/preferences-contact-list.png" /> Contratos</button></a><hr>
+	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Editar Datos Personales"><button type="submit" class="btn btn-default btn-sm" name="C"><img class="img-reponsive img-rounded" src="../../icons/actions/user-group-properties.png" /> Mis Datos</button></a><hr>
+	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Administrar Usuarios"><button type="submit" class="btn btn-default btn-sm" name="D"><img class="img-reponsive img-rounded" src="../../icons/actions/user-group-properties.png" /> Usuarios</button></a>
 	</form>
 	</div>
     <div class="col-sm-10 text-left"> 
       <h1>Bienvenido/a <?php echo $nombre ?></p></h1>
-      <p>Siadcon - Sistema de Administración de Contratos</p>
+      <a href="main.php" data-toggle="tooltip" data-placement="right" title="Sistema de Administración de Contratos"><button type="button" class="btn btn-default"><img class="img-reponsive img-rounded" src="../../icons/actions/go-home.png" /> Siadcon</button></a><br>
       <hr>
       
       <?php
@@ -228,7 +234,7 @@ function Text(string){//validacion solo letras
 </div>
 
 <footer class="container-fluid text-center">
-  <p>Ministerio de Economía de la Nación - Dirección de Presupuesto y Evaluación Presupuestaria</p>
+  <p><img class="img-reponsive img-rounded" src="../../img/escudo32x32.png" /> Ministerio de Economía de la Nación - Dirección de Presupuesto y Evaluación de Gastos en Personal</p>
 </footer>
 
 <!-- Modal -->
