@@ -57,6 +57,21 @@ if (is_file($path))
    readfile($path);
 }
 }else{
-   exit();
+    echo '<html><head>';
+	  skeleton();
+    echo '</head><body background="../../img/background.png" class="img-fluid" alt="Responsive image" style="background-repeat: no-repeat; background-position: center center; background-size: cover; height: 100%">';
+    echo '<div class="section"><br>
+	  <div class="container">
+	  <div class="row">
+	  <div class="col-md-12">';
+    echo '<div class="alert alert-danger" role="alert">';
+    echo '<p><img class="img-reponsive img-rounded" src="../../icons/status/task-attention.png" /> No hay archivo cargado aún. Cargue uno desde el botón PDF upload!</p>';
+    echo "</div>";
+    echo "</div>";
+    echo "</div>";
+    echo "</div>";
+    echo "</div>";
+    echo '</body></html>';
+    echo '<meta http-equiv="refresh" content="5;URL=../main/main.php "/>';
    }
 ?>

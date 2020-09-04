@@ -205,7 +205,6 @@ var myChart = new Chart(ctx, {
   </div>
        
         <div class="panel-footer">
-        <a href="../informes/informes.php"><button type="button" class="btn btn-default btn-sm"><img class="img-reponsive img-rounded" src="../../icons/devices/printer.png" /> Imprimir Informe</button></a>
         </div>
       </div>
     </div>
@@ -245,7 +244,6 @@ var myChart = new Chart(ctx, {
 </script>   
   </div>
          <div class="panel-footer">
-         <a href="#"><button type="button" class="btn btn-default btn-sm"><img class="img-reponsive img-rounded" src="../../icons/devices/printer.png" /> Imprimir Informe</button></a>
          </div>
       </div>
     </div>

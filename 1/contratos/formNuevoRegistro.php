@@ -66,6 +66,8 @@
                             $nivel = mysqli_real_escape_string($conn,$_POST["nivel"]);
                             $organismo = mysqli_real_escape_string($conn,$_POST["organismo"]);
                             $organismo = strtoupper($organismo);
+                            $jurisdiccion = mysqli_real_escape_string($conn,$_POST["jurisdiccion"]);
+                            $jurisdiccion = strtoupper($jurisdiccion);
                             $tipo_contrato = mysqli_real_escape_string($conn,$_POST["tipo_contrato"]);
                             $excepcion = mysqli_real_escape_string($conn,$_POST["excepcion"]);
                             $monto = mysqli_real_escape_string($conn,$_POST["monto"]);
@@ -75,7 +77,7 @@
                             $act_adm = mysqli_real_escape_string($conn,$_POST["act_adm"]);
                             $obs = mysqli_real_escape_string($conn,$_POST["observaciones"]);
                                                         
-                             addContract($nombre,$nro_dni,$genero,$escalafon,$nivel,$organismo,$tipo_contrato,$excepcion,$monto,$f_from,$f_to,$nro_gde,$act_adm,$osb,$conn);
+                             addContract($nombre,$nro_dni,$genero,$escalafon,$nivel,$organismo,$jurisdiccion,$tipo_contrato,$excepcion,$monto,$f_from,$f_to,$nro_gde,$act_adm,$obs,$conn);
                             }
                             }else{
 			      mysqli_error($conn);
