@@ -385,7 +385,7 @@ function newContract(){
 		  </div>
 		<div class="form-group">
 		  <label for="pwd">Escalafón</label>
-		  <input type="text" class="form-control" id="escalafon" name="escalafon" onkeyup="this.value=Numeros(this.value);" onKeyDown="limitText(this,10);" onKeyUp="limitText(this,10);" required>
+		  <input type="text" class="form-control" id="escalafon" name="escalafon" onkeyup="this.value=Text(this.value);" onKeyDown="limitText(this,20);" onKeyUp="limitText(this,20);" required>
 		</div>
 		<div class="form-group">
 		  <label for="pwd">Nivel y Grado</label>

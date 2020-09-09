@@ -22,14 +22,14 @@
 	}
 
 	$sql = "select count(genero) as cant from contratos where genero = 'Femenino'";
-	mysqli_select_db('siadon');
+	mysqli_select_db('siadcon');
 	$query = mysqli_query($conn,$sql);
 	while($row = mysqli_fetch_array($query)){
 	    $mujeres = $row['cant'];
 	}
 	
 	$sql = "select count(genero) as cant from contratos where genero = 'Masculino'";
-	mysqli_select_db('siadon');
+	mysqli_select_db('siadcon');
 	$query = mysqli_query($conn,$sql);
 	while($row = mysqli_fetch_array($query)){
 	    $hombres = $row['cant'];

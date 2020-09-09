@@ -5,7 +5,6 @@
 	$varsession = $_SESSION['user'];
 	
 	$sql = "select nombre from usuarios where user = '$varsession'";
-	mysqli_select_db('siadcon');
 	$query = mysqli_query($conn,$sql);
 	while($row = mysqli_fetch_array($query)){
 	      $nombre = $row['nombre'];
@@ -32,9 +31,7 @@
 	
 ?>
 
-<!DOCTYPE html>
-<html lang="es">
-<head>
+
 
   
   
@@ -96,11 +93,7 @@ div{
 
   
   </style>
-  
-  
-
-</head>
-<body>
+<page>
 <p><img class="img-reponsive img-rounded" src="../../img/escudo32x32.png" /> Ministerio de Economía de la Nación - Dirección de Presupuesto y Evaluación de Gastos en Personal</p>
 <hr>
 <h1 class="italic">Sistema de Administración de Contratos</h1>
@@ -122,6 +115,4 @@ div{
  
  </table>
 </div>
-
-</body>
-</html>
+</page>
