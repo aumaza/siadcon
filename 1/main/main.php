@@ -82,7 +82,7 @@
 function Numeros(string){
 //Solo numeros
     var out = '';
-    var filtro = '1234567890';//Caracteres validos
+    var filtro = '1234567890.';//Caracteres validos
 	
     //Recorrer el texto y verificar si el caracter se encuentra en la lista de validos 
     for (var i=0; i<string.length; i++){

@@ -302,6 +302,7 @@ if($conn){
                     <th class='text-nowrap text-center'>Jurisdicción</th>
                     <th class='text-nowrap text-center'>Normativa</th>
                     <th class='text-nowrap text-center'>Excepción</th>
+                    <th class='text-nowrap text-center'>UR</th>
                     <th class='text-nowrap text-center'>Monto</th>
                     <th class='text-nowrap text-center'>Desde</th>
                     <th class='text-nowrap text-center'>Hasta</th>
@@ -327,6 +328,7 @@ if($conn){
 			 echo "<td align=center>".$fila['jurisdiccion']."</td>";
 			 echo "<td align=center>".$fila['tipo_contrato']."</td>";
 			 echo "<td align=center>".$fila['excepcion']."</td>";
+			 echo "<td align=center>".$fila['ur']."</td>";
 			 echo "<td align=center>".$fila['monto']."</td>";
 			 echo "<td align=center>".$fila['f_from']."</td>";
 			 echo "<td align=center>".$fila['f_to']."</td>";
@@ -412,9 +414,21 @@ function newContract(){
 		    <label><input type="checkbox" name="excepcion" value="No"> No</label>
 		  </div><hr>
 		  </div>
+		  <div class="form-group">
+		  <label for="pwd">Cantidad UR:</label>
+		  <input type="text" class="form-control" id="ur" name="ur" onkeyup="this.value=Numeros(this.value);" onKeyDown="envyText();" onKeyUp="limitText(this,6);" required>
+		</div>
+		<script>
+		  function envyText(){
+		      var ur = document.getElementById("ur").value;
+		      result = ur * 54.02;
+		      monto = parseFloat(result).toFixed(2);      
+		      document.getElementById("monto").value = monto;
+		  }
+		</script>
 		<div class="form-group">
 		  <label for="pwd">Monto:</label>
-		  <input type="text" class="form-control" id="monto" name="monto" onkeyup="this.value=Numeros(this.value);" onKeyDown="limitText(this,6);" onKeyUp="limitText(this,6);" required>
+		  <input type="text" class="form-control" id="monto" name="monto" onkeyup="this.value=Numeros(this.value);" onKeyDown="limitText(this,10);" onKeyUp="limitText(this,10);" required>
 		</div>
 		<div class="form-group">
 		  <label for="pwd">Fecha Desde:</label>
@@ -501,6 +515,18 @@ function editContract($id,$conn){
 		  <input type="text" class="form-control" id="excepcion" name="excepcion" value="'.$fila['excepcion'].'" onKeyDown="limitText(this,2);" onKeyUp="limitText(this,2);" required>
 		</div>
 		<div class="form-group">
+		  <label for="pwd">Cantidad UR:</label>
+		  <input type="text" class="form-control" id="ur" name="ur" value="'.$fila['ur'].'" onkeyup="this.value=Numeros(this.value);" onKeyDown="envyText();" onKeyUp="limitText(this,6);" required>
+		</div>
+		<script>
+		  function envyText(){
+		      var ur = document.getElementById("ur").value;
+		      result = ur * 54.02;
+		      monto = parseFloat(result).toFixed(2);      
+		      document.getElementById("monto").value = monto;
+		  }
+		</script>
+		<div class="form-group">
 		  <label for="pwd">Monto:</label>
 		  <input type="text" class="form-control" id="monto" name="monto" value="'.$fila['monto'].'" onkeyup="this.value=Numeros(this.value);" onKeyDown="limitText(this,6);" onKeyUp="limitText(this,6);" required>
 		</div>
@@ -536,12 +562,12 @@ function editContract($id,$conn){
 }
 
 
-function updateContract($id,$nombre,$nro_dni,$genero,$escalafon,$nivel,$organismo,$jurisdiccion,$tipo_contrato,$excepcion,$monto,$f_from,$f_to,$nro_gde,$act_adm,$obs,$conn){
+function updateContract($id,$nombre,$nro_dni,$genero,$escalafon,$nivel,$organismo,$jurisdiccion,$tipo_contrato,$excepcion,$ur,$monto,$f_from,$f_to,$nro_gde,$act_adm,$obs,$conn){
 
 		
 	mysqli_select_db('siadcon');
 	$sqlInsert = "update contratos set nombre = '$nombre', nro_dni = '$nro_dni', genero = '$genero', escalafon = '$escalafon', nivel = '$nivel', organismo = '$organismo', jurisdiccion = '$jurisdiccion',
-	tipo_contrato = '$tipo_contrato', excepcion = '$excepcion', monto = '$monto', f_from = '$f_from', f_to = '$f_to', nro_gde = '$nro_gde', observaciones = '$obs' where id = '$id'";
+	tipo_contrato = '$tipo_contrato', excepcion = '$excepcion', ur = '$ur', monto = '$monto', f_from = '$f_from', f_to = '$f_to', nro_gde = '$nro_gde', observaciones = '$obs' where id = '$id'";
            
 	$res = mysqli_query($conn,$sqlInsert);
 
@@ -711,14 +737,14 @@ if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])){
 }
 
 
-function addContract($nombre,$nro_dni,$genero,$escalafon,$nivel,$organismo,$jurisdiccion,$tipo_contrato,$excepcion,$monto,$f_from,$f_to,$nro_gde,$act_adm,$obs,$conn){
+function addContract($nombre,$nro_dni,$genero,$escalafon,$nivel,$organismo,$jurisdiccion,$tipo_contrato,$excepcion,$ur,$monto,$f_from,$f_to,$nro_gde,$act_adm,$obs,$conn){
 
 		
 	mysqli_select_db('siadcon');
 	$sqlInsert = "INSERT INTO contratos ".
-		"(f_carga,nombre,nro_dni,genero,escalafon,nivel,organismo,jurisdiccion,tipo_contrato,excepcion,monto,f_from,f_to,nro_gde,act_adm,observaciones)".
+		"(f_carga,nombre,nro_dni,genero,escalafon,nivel,organismo,jurisdiccion,tipo_contrato,excepcion,ur,monto,f_from,f_to,nro_gde,act_adm,observaciones)".
 		"VALUES ".
-      "(NOW(),'$nombre','$nro_dni','$genero','$escalafon','$nivel','$organismo','$jurisdiccion','$tipo_contrato','$excepcion','$monto','$f_from','$f_to','$nro_gde', '$act_adm','$obs')";
+      "(NOW(),'$nombre','$nro_dni','$genero','$escalafon','$nivel','$organismo','$jurisdiccion','$tipo_contrato','$excepcion','$ur','$monto','$f_from','$f_to','$nro_gde', '$act_adm','$obs')";
            
 	$res = mysqli_query($conn,$sqlInsert);
 
