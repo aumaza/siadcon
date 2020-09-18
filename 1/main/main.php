@@ -103,7 +103,7 @@ function Numeros(string){
 function Text(string){//validacion solo letras
     var out = '';
     //Se añaden las letras validas
-    var filtro ="^[abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ- ]+$"; // Caracteres Válidos
+    var filtro ="^[abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ-' ]+$"; // Caracteres Válidos
   
     for (var i=0; i<string.length; i++){
        if (filtro.indexOf(string.charAt(i)) != -1){ 
