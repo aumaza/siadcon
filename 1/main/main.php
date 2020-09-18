@@ -198,6 +198,7 @@ $(document).ready(function(){
 	<a href="#" data-toggle="tooltip" data-placement="right" title="Cargar Contrato"><button type="submit" class="btn btn-default btn-sm" name="A"><img class="img-reponsive img-rounded" src="../../icons/apps/accessories-text-editor.png" /> + Contrato</button></a><hr>
 	<a href="#" data-toggle="tooltip" data-placement="right" title="Listar Contratos"><button type="submit" class="btn btn-default btn-sm" name="B"><img class="img-reponsive img-rounded" src="../../icons/apps/preferences-contact-list.png" /> Contratos</button></a><hr>
 	<a href="#" data-toggle="tooltip" data-placement="right" title="Editar datos Personales"><button type="submit" class="btn btn-default btn-sm" name="C"><img class="img-reponsive img-rounded" src="../../icons/actions/user-group-properties.png" /> Mis Datos</button></a><hr>
+	<a href="#" data-toggle="tooltip" data-placement="right" title="Subir Archivo"><button type="submit" class="btn btn-default btn-sm" name="D"><img class="img-reponsive img-rounded" src="../../icons/actions/svn-commit.png" /> Archivo</button></a><hr>
 	</form>
 	<a href="../informes/informes.php" data-toggle="tooltip" data-placement="right" title="Informes Estadísticos"><button type="button" class="btn btn-default btn-sm"><img class="img-reponsive img-rounded" src="../../icons/actions/view-calendar-tasks.png" /> Informes</button></a>
     </div>
@@ -218,8 +219,11 @@ $(document).ready(function(){
       if(isset($_POST['C'])){
 	      loadUser($conn,$nombre);
       }
-      
-   
+      if(isset($_POST['D'])){
+	      get_file();
+	          
+      }
+        
    
    ?>
       

@@ -886,6 +886,126 @@ function resetPass($conn,$usuario){
 }
 
 
+/*
+** funcion para subir archivo csv
+*/
+function get_file(){
+
+	echo '<div class="panel panel-success" >
+	      <div class="panel-heading"><span class="pull-center "><img src="../../icons/actions/svn-commit.png"  class="img-reponsive img-rounded"> Subir Archivo';
+	echo '</div><br>';
+	           
+                          
+	echo '<form action="../contratos/upload_file.php" method="post" enctype="multipart/form-data">
+	  <div class="container">
+	    <div class="row">
+	      <div class="col-sm-8">
+		<div class="panel panel-default">
+		  <div class="panel-heading">
+		    <strong>Seleccione el Archivo a Subir:</strong><br>
+		    <input type="file" name="file" class="btn btn-default"><br>
+		    <button type="submit" class="btn btn-warning navbar-btn" name="submit"><span class="glyphicon glyphicon-cloud-upload"></span> Subir</button>
+		  </div>
+		</div>
+	      </div>  
+	    </div>
+	  </div>
+	</form>';
+
+}
+
+
+function upload_file($conn){
+	
+	$targetDir = '../contratos/';
+	$fileName = basename($_FILES["file"]["name"]);
+	$targetFilePath = $targetDir . $fileName;
+	$destinationPath = '../../files';
+
+	$fileType = pathinfo($targetFilePath,PATHINFO_EXTENSION);
+	
+	if($conn){
+	
+	if(!empty($_FILES["file"]["name"])){
+   
+   // Allow certain file formats
+    $allowTypes = array('csv');
+    
+    if(in_array($fileType, $allowTypes)){
+    
+        // Upload file to server
+        if(move_uploaded_file($_FILES["file"]["tmp_name"], $targetFilePath)){
+        
+		echo '<div class="alert alert-success" role="alert">';
+		echo '<h1 class="panel-title text-left" contenteditable="true"><img src="../../img/success-img.png" alt="Avatar" class="avatar" ><strong>El Archivo '.$fileName. ' se ha subido correctamente.</strong>';
+                echo "</div><hr>";
+                
+                }else{
+		echo '<div class="alert alert-warning" role="alert">';
+		echo '<h1 class="panel-title text-left" contenteditable="true"><img src="../../img/think-img.png" alt="Avatar" class="avatar" ><strong> Ups. Hubo un error subiendo el Archivo.</strong>';
+                echo "</div><hr>";
+                    
+                }
+                }else{
+	    echo '<div class="alert alert-danger" role="alert">';
+	    echo '<h1 class="panel-title text-left" contenteditable="true"><img src="../../img/aircraft-crash64-img.png" alt="Avatar" class="avatar" ><strong> Ups, solo archivos con extensión: CSV son soportados.</strong>';
+	    echo "</div><hr>";
+            
+           }
+           
+          
+	   $archivo = fopen($fileName, "r");
+            // Insert image file name into database
+            
+            while (($data = fgetcsv($archivo, 1000, ",")) !== FALSE) {
+		
+		$sql = "INSERT INTO contratos ".
+		"(f_carga,nombre,nro_dni,genero,escalafon,nivel,organismo,jurisdiccion,tipo_contrato,excepcion,ur,monto,f_from,f_to,nro_gde,act_adm,observaciones)".
+		"VALUES ".
+		"(NOW(),'$data[0]','$data[1]','$data[2]','$data[3]','$data[4]','$data[5]','$data[6]','$data[7]','$data[8]','$data[9]','$data[10]','$data[11]','$data[12]','$data[13]','$data[14]','$data[15]')";
+           
+		//echo $sql;
+		mysqli_select_db('siadcon');
+		$res = mysqli_query($conn,$sql);
+		
+           }
+                 //$res = mysqli_query($conn,$sql);
+                 fclose($archivo);
+             
+	      
+	     if($res){
+            
+			  echo '<div class="alert alert-success" role="alert">';
+			  echo '<h1 class="panel-title text-left" contenteditable="true"><img src="../../img/success-img.png" alt="Avatar" class="avatar" ><strong> Base de Datos Actualizada correctamente..</strong>';
+                          echo "</div><hr>";
+                          copy($fileName, "$destinationPath/$fileName");
+                          unlink($fileName);
+                                          
+            }else{
+			  echo mysqli_error($conn);
+			  echo '<div class="alert alert-danger" role="alert">';
+			  echo '<h1 class="panel-title text-left" contenteditable="true"><img src="../../img/think-img.png" alt="Avatar" class="avatar" ><strong>No se ha podido Actualizar la base de datos. </strong></h1>';
+                          echo "</div><hr>";
+                          
+                
+            }
+           
+          
+                      
+        
+        }else{
+			  echo '<div class="alert alert-info" role="alert">';
+                          echo '<h1 class="panel-title text-left" contenteditable="true"><img src="../../img/refresh-img.png" alt="Avatar" class="avatar" ><strong> Por favor, seleccione al archivo a subir.</strong>';
+                          echo "</div><hr>";
+                          
+}
+}else{
+
+  mysqli_error($conn);
+}
+
+
+}
 
 
 
