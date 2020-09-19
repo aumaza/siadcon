@@ -60,7 +60,7 @@
 			else if($user = mysqli_fetch_assoc($q)){
 
 				if(strcmp($_SESSION["user"], 'root') == 0){
-				logs($SESSION["user"]);
+				logs($_SESSION["user"]);
 				echo "<br>";
 				echo '<div class="alert alert-success" role="alert">';
 				echo '<span class="pull-center "><img src="img/tenor.gif" class="img-reponsive img-rounded" weight="5%" height="5%">';
