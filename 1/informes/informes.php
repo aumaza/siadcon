@@ -157,7 +157,7 @@ $(document).ready(function(){
 </nav>
 
 <!-- primer bloque -->
-<div class="container">    
+<div class="container-fluid">    
   <div class="row">
     <div class="col-sm-6">
       <div class="panel panel-default">
@@ -252,7 +252,7 @@ var myChart = new Chart(ctx, {
 <!-- end primer bloque -->
 
 <!-- segundo bloque -->
-   <div class="container">
+   <div class="container-fluid">
    <div class="row">
    <div class="col-sm-6"> 
       <div class="panel panel-default">
@@ -362,7 +362,7 @@ var myChart = new Chart(ctx, {
 <!-- end segundo bloque -->
    
 <!-- tercer bloque -->   
-   <div class="container">
+   <div class="container-fluid">
    <div class="row">
    <div class="col-sm-6"> 
       <div class="panel panel-default">
