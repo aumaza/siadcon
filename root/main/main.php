@@ -198,7 +198,8 @@ $(document).ready(function(){
 	 <a href="#" data-toggle="tooltip" data-placement="right" title="Nuevo Registro"><button type="submit" class="btn btn-default btn-sm" name="A"><img class="img-reponsive img-rounded" src="../../icons/apps/accessories-text-editor.png" /> + Contrato</button></a><hr>
 	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Listar Contratos"><button type="submit" class="btn btn-default btn-sm" name="B"><img class="img-reponsive img-rounded" src="../../icons/apps/preferences-contact-list.png" /> Contratos</button></a><hr>
 	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Editar Datos Personales"><button type="submit" class="btn btn-default btn-sm" name="C"><img class="img-reponsive img-rounded" src="../../icons/actions/user-group-properties.png" /> Mis Datos</button></a><hr>
-	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Administrar Usuarios"><button type="submit" class="btn btn-default btn-sm" name="D"><img class="img-reponsive img-rounded" src="../../icons/actions/user-group-properties.png" /> Usuarios</button></a>
+	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Administrar Usuarios"><button type="submit" class="btn btn-default btn-sm" name="D"><img class="img-reponsive img-rounded" src="../../icons/actions/user-group-properties.png" /> Usuarios</button></a><hr>
+	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Backup de Archivos Subidos"><button type="submit" class="btn btn-default btn-sm" name="E"><img class="img-reponsive img-rounded" src="../../icons/apps/utilities-file-archiver.png" /> BackUp</button></a>
 	</form>
 	</div>
     <div class="col-sm-10 text-left"> 
@@ -219,6 +220,9 @@ $(document).ready(function(){
       }
       if(isset($_POST['D'])){
 	     usuarios($conn);
+      }
+      if(isset($_POST['E'])){
+	    backup();
       }
       
    

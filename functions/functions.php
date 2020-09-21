@@ -1033,6 +1033,18 @@ function logs($var){
   
 }
 
+/*
+** funcion para realizar backup de directorio
+*/
+function backup(){
+
+	 $message=shell_exec("../../backup.sh");
+         echo '<div class="alert alert-success" role="alert">';
+	 echo '<h1 class="panel-title text-left" contenteditable="true"><img src="../../icons/actions/dialog-ok-apply.png"  class="img-reponsive img-rounded"><strong> '.print_r($message).'</strong></h1>';
+         echo "</div>";
+         
+
+}
 
 
 ?>

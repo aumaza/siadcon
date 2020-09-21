@@ -65,7 +65,7 @@
                             $pass2 = mysqli_real_escape_string($conn,$_POST["pass2"]);
                             $permisos = mysqli_real_escape_string($conn,$_POST["permisos"]);
                             
-                            if(empty($nombe) || empty($user) || empty($email) || empty($pass1) || empty($pass2) || empty($permisos)){
+                            if(empty($nombre) || empty($user) || empty($email) || empty($pass1) || empty($pass2) || empty($permisos)){
 				    echo "<br>";
 				    echo '<div class="container">';
 				    echo '<div class="alert alert-warning" role="alert">';
