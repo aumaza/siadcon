@@ -361,7 +361,7 @@ if($conn){
 /*
 ** Funcion alta de contracto
 */
-function newContract(){
+function newContract($conn){
 
       echo '<div class="container">
 	    <div class="row">
@@ -385,10 +385,33 @@ function newContract(){
 		    <label><input type="checkbox" name="genero" value="Masculino"> Masculino</label>
 		  </div><hr>
 		  </div>
+		  
 		<div class="form-group">
-		  <label for="pwd">Escalafón</label>
-		  <input type="text" class="form-control" id="escalafon" name="escalafon" onkeyup="this.value=Text(this.value);" onKeyDown="limitText(this,20);" onKeyUp="limitText(this,20);" required>
+		  <label for="sel1">Escalafón</label>
+		  <select class="form-control" name="escalafon" required>
+		  <option value="" disabled selected>Seleccionar</option>';
+		    
+		    if($conn){
+
+		      $query = "SELECT * FROM escalafones";
+		      mysqli_select_db('siadcon');
+		      $res = mysqli_query($conn,$query);
+
+		      if($res)
+		      {
+			
+			  while ($valores = mysqli_fetch_array($res))
+			    {
+				echo '<option value="'.$valores[cod_esc].'">'.$valores[descripcion].'</option>';
+			    }
+			}
+			}
+
+			mysqli_close($conn);
+		  
+		 echo '</select>
 		</div>
+		
 		<div class="form-group">
 		  <label for="pwd">Nivel y Grado</label>
 		  <input type="text" class="form-control" id="nivel" name="nivel" onKeyDown="limitText(this,5);" onKeyUp="limitText(this,5);" required>
@@ -470,7 +493,7 @@ function editContract($id,$conn){
       mysqli_select_db('siadcon');
       $res = mysqli_query($conn,$sql);
       $fila = mysqli_fetch_assoc($res);
-      
+          
 	
       echo '<div class="container">
 	    <div class="row">
@@ -490,10 +513,34 @@ function editContract($id,$conn){
 		 <label for="pwd">Género</label>
 		  <input type="text" class="form-control" id="genero" name="genero" value="'.$fila['genero'].'" onkeyup="this.value=Text(this.value);" onKeyDown="limitText(this,9);" onKeyUp="limitText(this,9);" required>
 		</div>
+		
 		<div class="form-group">
-		  <label for="pwd">Escalafón</label>
-		  <input type="text" class="form-control" id="escalafon" name="escalafon" value="'.$fila['escalafon'].'" onkeyup="this.value=Numeros(this.value);" onKeyDown="limitText(this,10);" onKeyUp="limitText(this,10);" required>
-		</div>
+		  <label for="sel1">Escalafón</label>
+		  <select class="form-control" name="escalafon" required>
+		  
+		  <option value="" disabled selected>Seleccionar</option>';
+		    
+		    if($conn){
+		      
+		      $query = "SELECT * FROM escalafones";
+		      mysqli_select_db('siadcon');
+		      $res = mysqli_query($conn,$query);
+		     
+		      if($res){
+			
+			  while ($valores = mysqli_fetch_array($res)){
+			  
+			  	echo '<option value="'.$valores[cod_esc].'" '.("'.$fila[escalafon].'" == "'.$valores[cod_esc].'" ? "selected" : "").'>'.$valores[descripcion].'</option>';
+			    }
+			}
+			}
+
+			mysqli_close($conn);
+			
+			echo '</select>
+			  </div>
+		
+		
 		<div class="form-group">
 		  <label for="pwd">Nivel y Grado</label>
 		  <input type="text" class="form-control" id="nivel" name="nivel" value="'.$fila['nivel'].'" onKeyDown="limitText(this,5);" onKeyUp="limitText(this,5);" required>

@@ -211,7 +211,7 @@ $(document).ready(function(){
       <?php
    
       if(isset($_POST['A'])){
-	      newContract();
+	      newContract($conn);
       }
       if(isset($_POST['B'])){
 	      contratos($conn,$varsession);
