@@ -22,7 +22,7 @@
 
 <html><head>
 	<meta charset="utf-8">
-	<title>Usuarios - Actualizar Registro</title>
+	<title>Escalafones - Actualizar Registro</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/png" href="../../icons/actions/bookmarks-organize.png" />
 	<?php skeleton();?>
@@ -62,29 +62,23 @@
 	     if (isset($_POST['A'])){
 			    
 			    $id = mysqli_real_escape_string($conn,$_POST["id"]);
-                            $user = mysqli_real_escape_string($conn,$_POST["user"]);
-                            $pass1 = mysqli_real_escape_string($conn,$_POST["pass1"]);
+                            $cod_esc = mysqli_real_escape_string($conn,$_POST["cod_esc"]);
+                            $descripcion = mysqli_real_escape_string($conn,$_POST["descripcion"]);
                             $pass2 = mysqli_real_escape_string($conn,$_POST["pass2"]);
                               
-                             if(!empty($pass1) || !empty($pass2)){
-                             updatePass($id,$pass1,$pass2,$conn);
+                             if(!empty($cod_esc) || !empty($descripcion)){
+                             updateEscalafon($id,$cod_esc,$descripcion,$conn);
 			      }else{
 				    echo "<br>";
 				    echo '<div class="container">';
 				    echo '<div class="alert alert-warning" role="alert">';
-				    echo "El Password no puede estar vacio!. Aguarde un Instante que será Redireccionado";
+				    echo "Hay datos que no ha ingresado, reintente!. Aguarde un Instante que será Redireccionado";
 				    echo "</div>";
 				    echo "</div>";
 				    
 			      }
 			      }
-                             
-                             if (isset($_POST['B'])){
-					$id = mysqli_real_escape_string($conn,$_POST["id"]);
-                                        $role = mysqli_real_escape_string($conn,$_POST["permisos"]);
-                                        cambiarPermisos($id,$role,$conn);
-                                      }
-                                      }else {
+                              }else {
 
                                       mysqli_error($conn);
 

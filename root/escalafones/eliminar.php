@@ -1,5 +1,5 @@
-<?php  include "../../functions/functions.php"; ?>
-<?php  include "../../connection/connection.php"; 
+<?php  include "../../functions/functions.php";
+       include "../../connection/connection.php"; 
 
 	session_start();
 	$varsession = $_SESSION['user'];
@@ -14,17 +14,14 @@
 	die();
 	}
 
-	$id = $_GET['id'];
-	
-
 ?>
 
 
 <html><head>
 	<meta charset="utf-8">
-	<title>Usuarios - Actualizar Registro</title>
+	<title>Eliminar Registro</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="icon" type="image/png" href="../../icons/actions/bookmarks-organize.png" />
+	<link rel="icon" type="image/png" href="../../icons/actions/trash-empty.png" />
 	<?php skeleton();?>
 	
 </head>
@@ -47,7 +44,6 @@
             <div class="container">
                 <div class="row">
                     <div class="col-md-12">
-                        
                     </div>
                 </div>
             </div>
@@ -58,37 +54,12 @@
        if($conn){
        
 	mysqli_select_db('siadcon');
-	  	
-	     if (isset($_POST['A'])){
-			    
-			    $id = mysqli_real_escape_string($conn,$_POST["id"]);
-                            $user = mysqli_real_escape_string($conn,$_POST["user"]);
-                            $pass1 = mysqli_real_escape_string($conn,$_POST["pass1"]);
-                            $pass2 = mysqli_real_escape_string($conn,$_POST["pass2"]);
-                              
-                             if(!empty($pass1) || !empty($pass2)){
-                             updatePass($id,$pass1,$pass2,$conn);
-			      }else{
-				    echo "<br>";
-				    echo '<div class="container">';
-				    echo '<div class="alert alert-warning" role="alert">';
-				    echo "El Password no puede estar vacio!. Aguarde un Instante que será Redireccionado";
-				    echo "</div>";
-				    echo "</div>";
-				    
-			      }
-			      }
-                             
-                             if (isset($_POST['B'])){
-					$id = mysqli_real_escape_string($conn,$_POST["id"]);
-                                        $role = mysqli_real_escape_string($conn,$_POST["permisos"]);
-                                        cambiarPermisos($id,$role,$conn);
-                                      }
-                                      }else {
-
-                                      mysqli_error($conn);
-
-                                    }
+	$id = $_GET['id'];
+        delEscalafon($id,$conn);
+        }else{
+	      mysqli_error($conn);
+        }
+                                    
 
   //cerramos la conexion
   

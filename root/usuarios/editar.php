@@ -11,7 +11,7 @@
 	echo '<br>';
 	echo "O no tiene permisos o no ha iniciado sesion...";
 	echo "</div>";
-	echo '<a href="../../index.html"><br><br><button type="submit" class="btn btn-primary">Aceptar</button></a>';	
+	echo '<a href="../../logout.php"><br><br><button type="submit" class="btn btn-primary">Aceptar</button></a>';	
 	die();
 	}
 	

@@ -195,16 +195,18 @@ $(document).ready(function(){
   <div class="row content">
     <div class="col-sm-2 sidenav">
       <form action="main.php" method="POST">
-	 <a href="#" data-toggle="tooltip" data-placement="right" title="Nuevo Registro"><button type="submit" class="btn btn-default btn-sm" name="A"><img class="img-reponsive img-rounded" src="../../icons/apps/accessories-text-editor.png" /> + Contrato</button></a><hr>
+	 <a href="#" data-toggle="tooltip" data-placement="right" title="Nuevo Registro"><button type="submit" class="btn btn-default btn-sm" name="A"><img class="img-reponsive img-rounded" src="../../icons/actions/list-add.png" /> Contrato</button></a><hr>
 	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Listar Contratos"><button type="submit" class="btn btn-default btn-sm" name="B"><img class="img-reponsive img-rounded" src="../../icons/apps/preferences-contact-list.png" /> Contratos</button></a><hr>
 	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Editar Datos Personales"><button type="submit" class="btn btn-default btn-sm" name="C"><img class="img-reponsive img-rounded" src="../../icons/actions/user-group-properties.png" /> Mis Datos</button></a><hr>
 	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Administrar Usuarios"><button type="submit" class="btn btn-default btn-sm" name="D"><img class="img-reponsive img-rounded" src="../../icons/actions/user-group-properties.png" /> Usuarios</button></a><hr>
+	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Agregar Escalafón"><button type="submit" class="btn btn-default btn-sm" name="F"><img class="img-reponsive img-rounded" src="../../icons/actions/list-add.png" /> Escalafón</button></a><hr>
+	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Listar Escalafones"><button type="submit" class="btn btn-default btn-sm" name="G"><img class="img-reponsive img-rounded" src="../../icons/places/favorites.png" /> Escalafones</button></a><hr>
 	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Backup de Archivos Subidos"><button type="submit" class="btn btn-default btn-sm" name="E"><img class="img-reponsive img-rounded" src="../../icons/apps/utilities-file-archiver.png" /> BackUp</button></a>
 	</form>
 	</div>
     <div class="col-sm-10 text-left"> 
       <h1>Bienvenido/a <?php echo $nombre ?></p></h1>
-      <a href="main.php" data-toggle="tooltip" data-placement="right" title="Sistema de Administración de Contratos"><button type="button" class="btn btn-default"><img class="img-reponsive img-rounded" src="../../icons/actions/go-home.png" /> Siadcon</button></a><br>
+      <a href="main.php" data-toggle="tooltip" data-placement="right" title="Sistema de Administración de Contratos"><button type="button" class="btn btn-default"><img class="img-reponsive img-rounded" src="../../icons/actions/go-home.png" /> Home</button></a><br>
       <hr>
       
       <?php
@@ -224,6 +226,12 @@ $(document).ready(function(){
       if(isset($_POST['E'])){
 	    backup();
       }
+      if(isset($_POST['F'])){
+	    newEsc();
+      }
+      if(isset($_POST['G'])){
+	    escalafones($conn);
+      }
       
    
    
@@ -235,7 +243,7 @@ $(document).ready(function(){
      </div>
  
   </div>
-</div>
+</div><br><br><br><br><br><br><br>
 
 <footer class="container-fluid text-center">
   <p><img class="img-reponsive img-rounded" src="../../img/escudo32x32.png" /> Ministerio de Economía de la Nación - Dirección de Presupuesto y Evaluación de Gastos en Personal</p>
