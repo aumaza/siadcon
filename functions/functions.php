@@ -296,6 +296,7 @@ if($conn){
                     <th class='text-nowrap text-center'>Nombre y Apellido</th>
                     <th class='text-nowrap text-center'>DNI</th>
                     <th class='text-nowrap text-center'>Género</th>
+                    <th class='text-nowrap text-center'>Tipo Contratación</th>
                     <th class='text-nowrap text-center'>Escalafón</th>
                     <th class='text-nowrap text-center'>Nivel</th>
                     <th class='text-nowrap text-center'>Organismo</th>
@@ -322,6 +323,7 @@ if($conn){
 			 echo "<td align=center>".$fila['nombre']."</td>";
 			 echo "<td align=center>".$fila['nro_dni']."</td>";
 			 echo "<td align=center>".$fila['genero']."</td>";
+			 echo "<td align=center>".$fila['t_contratacion']."</td>";
 			 echo "<td align=center>".$fila['escalafon']."</td>";
 			 echo "<td align=center>".$fila['nivel']."</td>";
 			 echo "<td align=center>".$fila['organismo']."</td>";
@@ -376,14 +378,27 @@ function newContract($conn){
 		  <label for="apellido">DNI</label>
 		  <input type="text" class="form-control" id="dni" name="dni"  onkeyup="this.value=Numeros(this.value);" onKeyDown="limitText(this,11);" onKeyUp="limitText(this,11);" required>
 		</div><hr>
+		
 		<div class="form-group">
-		  <label for="pwd">Género</label><br>
-		<div class="checkbox">
-		    <label><input type="checkbox" name="genero" value="Femenino"> Femenino</label>
-		  </div>
-		  <div class="checkbox">
-		    <label><input type="checkbox" name="genero" value="Masculino"> Masculino</label>
+		  <label for="sel1">Género</label>
+		  <select class="form-control" name="genero">
+		    <option value="" disabled selected>Seleccionar</option>
+		    <option value="Femenino">Femenino</option>
+		    <option value="Masculino">Masculino</option>
+		    <option value="Otro">Otro</option>
+		    </select>
 		  </div><hr>
+		
+		<div class="form-group">
+		  <label for="sel1">Tipo Contratación</label>
+		  <select class="form-control" name="t_contratacion">
+		    <option value="" disabled selected>Seleccionar</option>
+		    <option value="000">1 - No Especifíca</option>
+		    <option value="001">2 - Nueva Contratación</option>
+		    <option value="002">3 - Renovación</option>
+		    <option value="003">4 - Designación Transitoria</option>
+		    <option value="004">5 - Horas Cátedra</option>
+		    </select>
 		  </div>
 		  
 		<div class="form-group">
@@ -407,7 +422,7 @@ function newContract($conn){
 			}
 			}
 
-			mysqli_close($conn);
+			//mysqli_close($conn);
 		  
 		 echo '</select>
 		</div>
@@ -420,23 +435,48 @@ function newContract($conn){
 		  <label for="pwd">Organismo:</label>
 		  <input type="text" class="form-control" id="organismo" name="organismo" onkeyup="this.value=Text(this.value);" onKeyDown="limitText(this,60);" onKeyUp="limitText(this,60);" required>
 		</div>
+		
 		<div class="form-group">
-		  <label for="pwd">Jurisdicción:</label>
-		  <input type="text" class="form-control" id="jurisdiccion" name="jurisdiccion" onkeyup="this.value=Text(this.value);" onKeyDown="limitText(this,60);" onKeyUp="limitText(this,60);" required>
+		  <label for="sel1">Jurisdicción</label>
+		  <select class="form-control" name="jurisdiccion" required>
+		  <option value="" disabled selected>Seleccionar</option>';
+		    
+		    if($conn){
+
+		      $query = "SELECT * FROM jurisdiccion";
+		      mysqli_select_db('siadcon');
+		      $res = mysqli_query($conn,$query);
+
+		      if($res)
+		      {
+			
+			  while ($valores = mysqli_fetch_array($res))
+			    {
+				echo '<option value="'.$valores[cod_jur].'">'.$valores[descripcion].'</option>';
+			    }
+			}
+			}
+
+			mysqli_close($conn);
+		  
+		 echo '</select>
 		</div>
+		
 		<div class="form-group">
 		  <label for="pwd">Normativa:</label>
 		  <input type="text" class="form-control" id="tipo_contrato" name="tipo_contrato"  onKeyDown="limitText(this,25);" onKeyUp="limitText(this,25);" required>
 		</div><hr>
+		
 		<div class="form-group">
-		  <label for="pwd">Excepción</label><br>
-		<div class="checkbox">
-		    <label><input type="checkbox" name="excepcion" value="Si"> Si</label>
-		  </div>
-		  <div class="checkbox">
-		    <label><input type="checkbox" name="excepcion" value="No"> No</label>
+		  <label for="sel1">Excepción</label>
+		  <select class="form-control" name="excepcion">
+		    <option value="" disabled selected>Seleccionar</option>
+		    <option value="Si">Si</option>
+		    <option value="No">No</option>
+		    </select>
 		  </div><hr>
-		  </div>
+		
+		  
 		  <div class="form-group">
 		  <label for="pwd">Cantidad UR:</label>
 		  <input type="text" class="form-control" id="ur" name="ur" onkeyup="this.value=Numeros(this.value);" onKeyDown="envyText();" onKeyUp="limitText(this,6);" required>
@@ -509,10 +549,28 @@ function editContract($id,$conn){
 		  <label for="apellido">DNI</label>
 		  <input type="text" class="form-control" id="dni" name="dni"  value="'.$fila['nro_dni'].'" onkeyup="this.value=Numeros(this.value);" onKeyDown="limitText(this,11);" onKeyUp="limitText(this,11);" required>
 		</div>
+		
 		<div class="form-group">
-		 <label for="pwd">Género</label>
-		  <input type="text" class="form-control" id="genero" name="genero" value="'.$fila['genero'].'" onkeyup="this.value=Text(this.value);" onKeyDown="limitText(this,9);" onKeyUp="limitText(this,9);" required>
-		</div>
+		  <label for="sel1">Género</label>
+		  <select class="form-control" name="genero">
+		    <option value="" disabled selected>Seleccionar</option>
+		    <option value="Femenino" '.($fila['genero'] == "Femenino" ? "selected" : ""). '>Femenino</option>
+		    <option value="Masculino" '.($fila['genero'] == "Masculino" ? "selected" : ""). '>Masculino</option>
+		    <option value="Otro" '.($fila['genero'] == "Otro" ? "selected" : ""). '>Otro</option>
+		    </select>
+		  </div><hr>
+		
+		<div class="form-group">
+		  <label for="sel1">Tipo Contratación</label>
+		  <select class="form-control" name="t_contratacion">
+		    <option value="" disabled selected>Seleccionar</option>
+		    <option value="000" '.($fila['t_contratacion'] == "000" ? "selected" : ""). '>1 - No Especifíca</option>
+		    <option value="001" '.($fila['t_contratacion'] == "001" ? "selected" : ""). '>2 - Nueva Contratación</option>
+		    <option value="002" '.($fila['t_contratacion'] == "002" ? "selected" : ""). '>3 - Renovación</option>
+		    <option value="003" '.($fila['t_contratacion'] == "003" ? "selected" : ""). '>4 - Designación Transitoria</option>
+		    <option value="004" '.($fila['t_contratacion'] == "004" ? "selected" : ""). '>5 - Horas Cátedra</option>
+		    </select>
+		  </div>
 		
 		<div class="form-group">
 		  <label for="sel1">Escalafón</label>
@@ -535,7 +593,7 @@ function editContract($id,$conn){
 			}
 			}
 
-			mysqli_close($conn);
+			//mysqli_close($conn);
 			
 			echo '</select>
 			  </div>
@@ -549,18 +607,48 @@ function editContract($id,$conn){
 		  <label for="pwd">Organismo</label>
 		  <input type="text" class="form-control" id="organismo" name="organismo" value="'.$fila['organismo'].'" onkeyup="this.value=Text(this.value);" onKeyDown="limitText(this,60);" onKeyUp="limitText(this,60);" required>
 		</div>
+		
 		<div class="form-group">
-		  <label for="pwd">Jurisdicción</label>
-		  <input type="text" class="form-control" id="jurisdiccion" name="jurisdiccion" value="'.$fila['jurisdiccion'].'" onkeyup="this.value=Text(this.value);" onKeyDown="limitText(this,60);" onKeyUp="limitText(this,60);" required>
-		</div>
+		  <label for="sel1">Jurisdicción:</label>
+		  <select class="form-control" name="jurisdiccion" required>
+		  
+		  <option value="" disabled selected>Seleccionar</option>';
+		    
+		    if($conn){
+		      
+		      $query = "SELECT * FROM jurisdiccion";
+		      mysqli_select_db('siadcon');
+		      $res = mysqli_query($conn,$query);
+		     
+		      if($res){
+			
+			  while ($valores = mysqli_fetch_array($res)){
+			  
+			  	echo '<option value="'.$valores[cod_jur].'" '.("'.$fila[jurisdiccion].'" == "'.$valores[cod_jur].'" ? "selected" : "").'>'.$valores[descripcion].'</option>';
+			    }
+			}
+			}
+
+			mysqli_close($conn);
+			
+			echo '</select>
+			  </div>
+		
+		
 		<div class="form-group">
 		  <label for="pwd">Normativa:</label>
 		  <input type="text" class="form-control" id="tipo_contrato" name="tipo_contrato" value="'.$fila['tipo_contrato'].'" onKeyDown="limitText(this,25);" onKeyUp="limitText(this,25);" required>
 		</div>
+		
 		<div class="form-group">
-		  <label for="pwd">Excepción:</label>
-		  <input type="text" class="form-control" id="excepcion" name="excepcion" value="'.$fila['excepcion'].'" onKeyDown="limitText(this,2);" onKeyUp="limitText(this,2);" required>
-		</div>
+		  <label for="sel1">Excepción</label>
+		  <select class="form-control" name="excepcion">
+		    <option value="" disabled selected>Seleccionar</option>
+		    <option value="Si" '.($fila['excepcion'] == "Si" ? "selected" : ""). '>Si</option>
+		    <option value="No" '.($fila['excepcion'] == "No" ? "selected" : ""). '>No</option>
+		    </select>
+		  </div><hr>
+		
 		<div class="form-group">
 		  <label for="pwd">Cantidad UR:</label>
 		  <input type="text" class="form-control" id="ur" name="ur" value="'.$fila['ur'].'" onkeyup="this.value=Numeros(this.value);" onKeyDown="envyText();" onKeyUp="limitText(this,6);" required>
@@ -609,11 +697,11 @@ function editContract($id,$conn){
 }
 
 
-function updateContract($id,$nombre,$nro_dni,$genero,$escalafon,$nivel,$organismo,$jurisdiccion,$tipo_contrato,$excepcion,$ur,$monto,$f_from,$f_to,$nro_gde,$act_adm,$obs,$conn){
+function updateContract($id,$nombre,$nro_dni,$genero,$t_contratacion,$escalafon,$nivel,$organismo,$jurisdiccion,$tipo_contrato,$excepcion,$ur,$monto,$f_from,$f_to,$nro_gde,$act_adm,$obs,$conn){
 
 		
 	mysqli_select_db('siadcon');
-	$sqlInsert = "update contratos set nombre = '$nombre', nro_dni = '$nro_dni', genero = '$genero', escalafon = '$escalafon', nivel = '$nivel', organismo = '$organismo', jurisdiccion = '$jurisdiccion',
+	$sqlInsert = "update contratos set nombre = '$nombre', nro_dni = '$nro_dni', genero = '$genero', t_contratacion = '$t_contratacion', escalafon = '$escalafon', nivel = '$nivel', organismo = '$organismo', jurisdiccion = '$jurisdiccion',
 	tipo_contrato = '$tipo_contrato', excepcion = '$excepcion', ur = '$ur', monto = '$monto', f_from = '$f_from', f_to = '$f_to', nro_gde = '$nro_gde', observaciones = '$obs' where id = '$id'";
            
 	$res = mysqli_query($conn,$sqlInsert);
@@ -784,14 +872,14 @@ if(isset($_POST["submit"]) && !empty($_FILES["file"]["name"])){
 }
 
 
-function addContract($nombre,$nro_dni,$genero,$escalafon,$nivel,$organismo,$jurisdiccion,$tipo_contrato,$excepcion,$ur,$monto,$f_from,$f_to,$nro_gde,$act_adm,$obs,$conn){
+function addContract($nombre,$nro_dni,$genero,$t_contratacion,$escalafon,$nivel,$organismo,$jurisdiccion,$tipo_contrato,$excepcion,$ur,$monto,$f_from,$f_to,$nro_gde,$act_adm,$obs,$conn){
 
 		
 	mysqli_select_db('siadcon');
 	$sqlInsert = "INSERT INTO contratos ".
-		"(f_carga,nombre,nro_dni,genero,escalafon,nivel,organismo,jurisdiccion,tipo_contrato,excepcion,ur,monto,f_from,f_to,nro_gde,act_adm,observaciones)".
+		"(f_carga,nombre,nro_dni,genero,t_contratacion,escalafon,nivel,organismo,jurisdiccion,tipo_contrato,excepcion,ur,monto,f_from,f_to,nro_gde,act_adm,observaciones)".
 		"VALUES ".
-      "(NOW(),'$nombre','$nro_dni','$genero','$escalafon','$nivel','$organismo','$jurisdiccion','$tipo_contrato','$excepcion','$ur','$monto','$f_from','$f_to','$nro_gde', '$act_adm','$obs')";
+      "(NOW(),'$nombre','$nro_dni','$genero','$t_contratacion','$escalafon','$nivel','$organismo','$jurisdiccion','$tipo_contrato','$excepcion','$ur','$monto','$f_from','$f_to','$nro_gde', '$act_adm','$obs')";
            
 	$res = mysqli_query($conn,$sqlInsert);
 
@@ -1007,9 +1095,9 @@ function upload_file($conn){
             while (($data = fgetcsv($archivo, 1000, ",")) !== FALSE) {
 		
 		$sql = "INSERT INTO contratos ".
-		"(f_carga,nombre,nro_dni,genero,escalafon,nivel,organismo,jurisdiccion,tipo_contrato,excepcion,ur,monto,f_from,f_to,nro_gde,act_adm,observaciones)".
+		"(f_carga,nombre,nro_dni,genero,t_contratacion,escalafon,nivel,organismo,jurisdiccion,tipo_contrato,excepcion,ur,monto,f_from,f_to,nro_gde,act_adm,observaciones)".
 		"VALUES ".
-		"(NOW(),'$data[0]','$data[1]','$data[2]','$data[3]','$data[4]','$data[5]','$data[6]','$data[7]','$data[8]','$data[9]','$data[10]','$data[11]','$data[12]','$data[13]','$data[14]','$data[15]')";
+		"(NOW(),'$data[0]','$data[1]','$data[2]','$data[3]','$data[4]','$data[5]','$data[6]','$data[7]','$data[8]','$data[9]','$data[10]','$data[11]','$data[12]','$data[13]','$data[14]','$data[15]','$data[16]')";
            
 		//echo $sql;
 		mysqli_select_db('siadcon');

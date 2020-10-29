@@ -11,7 +11,20 @@ cod_esc varchar(6) not null,
 descripcion varchar(60) not null
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-#subir csv
+#crear tabla jurisdiccion
+create table jurisdiccion (
+id int(11) auto_increment primary key,
+cod_jur varchar(3) not null,
+descripcion varchar(60) not null
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+#subir csv contratos
 load data local infile '/var/www/htdocs/siadcon/sqls/contratos.csv' 
-into table contratos fields terminated by ',' enclosed by '"' lines terminated by '\r\n'
+into table contratos fields terminated by ',' enclosed by '"' lines terminated by '\n'
 (f_carga,nombre,nro_dni,genero,escalafon,nivel,organismo,tipo_contrato,monto,f_from,f_to,nro_gde,act_adm);
+
+#subir csv jurisdicciones
+load data local infile '/var/www/htdocs/siadcon/sqls/jurisdiccion.csv' 
+into table jurisdiccion fields terminated by ',' enclosed by '"' lines terminated by '\n'
+(cod_jur,descripcion);
