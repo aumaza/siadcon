@@ -163,12 +163,22 @@ $(document).ready(function(){
   height: 60px;
   border-radius: 60%;
 }
+.affix {
+    top: 0;
+    width: 100%;
+    z-index: 9999 !important;
+  }
+
+  .affix ~ .container-fluid {
+    position: relative;
+    padding-top: 70px;
+  }
 </style>
  
 </head>
-<body>
+<body data-spy="scroll" data-target=".navbar" data-offset="50">
 
-<nav class="navbar navbar-inverse">
+<nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
   <div class="container-fluid">
     <div class="navbar-header">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
