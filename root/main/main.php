@@ -205,13 +205,11 @@ $(document).ready(function(){
   <div class="row content">
     <div class="col-sm-2 sidenav">
       <form action="main.php" method="POST">
-	 <a href="#" data-toggle="tooltip" data-placement="right" title="Nuevo Registro"><button type="submit" class="btn btn-default btn-sm" name="A"><img class="img-reponsive img-rounded" src="../../icons/actions/list-add.png" /> Contrato</button></a><hr>
-	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Listar Contratos"><button type="submit" class="btn btn-default btn-sm" name="B"><img class="img-reponsive img-rounded" src="../../icons/apps/preferences-contact-list.png" /> Contratos</button></a><hr>
-	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Editar Datos Personales"><button type="submit" class="btn btn-default btn-sm" name="C"><img class="img-reponsive img-rounded" src="../../icons/actions/user-group-properties.png" /> Mis Datos</button></a><hr>
-	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Administrar Usuarios"><button type="submit" class="btn btn-default btn-sm" name="D"><img class="img-reponsive img-rounded" src="../../icons/actions/user-group-properties.png" /> Usuarios</button></a><hr>
-	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Agregar Escalafón"><button type="submit" class="btn btn-default btn-sm" name="F"><img class="img-reponsive img-rounded" src="../../icons/actions/list-add.png" /> Escalafón</button></a><hr>
-	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Listar Escalafones"><button type="submit" class="btn btn-default btn-sm" name="G"><img class="img-reponsive img-rounded" src="../../icons/places/favorites.png" /> Escalafones</button></a><hr>
-	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Backup de Archivos Subidos"><button type="submit" class="btn btn-default btn-sm" name="E"><img class="img-reponsive img-rounded" src="../../icons/apps/utilities-file-archiver.png" /> BackUp</button></a>
+	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Editar Datos Personales"><button type="submit" class="btn btn-default btn-sm" name="A"><img class="img-reponsive img-rounded" src="../../icons/actions/user-group-properties.png" /> Mis Datos</button></a><hr>
+	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Administrar Usuarios"><button type="submit" class="btn btn-default btn-sm" name="B"><img class="img-reponsive img-rounded" src="../../icons/actions/user-group-properties.png" /> Usuarios</button></a><hr>
+	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Agregar Escalafón"><button type="submit" class="btn btn-default btn-sm" name="D"><img class="img-reponsive img-rounded" src="../../icons/actions/list-add.png" /> Escalafón</button></a><hr>
+	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Listar Escalafones"><button type="submit" class="btn btn-default btn-sm" name="E"><img class="img-reponsive img-rounded" src="../../icons/places/favorites.png" /> Escalafones</button></a><hr>
+	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Backup de Archivos Subidos"><button type="submit" class="btn btn-default btn-sm" name="C"><img class="img-reponsive img-rounded" src="../../icons/apps/utilities-file-archiver.png" /> BackUp</button></a>
 	</form>
 	</div>
     <div class="col-sm-10 text-left"> 
@@ -222,24 +220,18 @@ $(document).ready(function(){
       <?php
    
       if(isset($_POST['A'])){
-	      newContract($conn);
-      }
-      if(isset($_POST['B'])){
-	      contratos($conn,$varsession);
-      }
-      if(isset($_POST['C'])){
 	      loadUser($conn,$nombre);
       }
-      if(isset($_POST['D'])){
+      if(isset($_POST['B'])){
 	     usuarios($conn);
       }
-      if(isset($_POST['E'])){
+      if(isset($_POST['C'])){
 	    backup();
       }
-      if(isset($_POST['F'])){
+      if(isset($_POST['D'])){
 	    newEsc();
       }
-      if(isset($_POST['G'])){
+      if(isset($_POST['E'])){
 	    escalafones($conn);
       }
       
