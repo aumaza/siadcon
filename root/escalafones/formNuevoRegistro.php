@@ -59,7 +59,8 @@
 	  	
 	     if (isset($_POST['A'])) {
 			    $cod_esc = mysqli_real_escape_string($conn,$_POST["cod_esc"]);
-                            $descripcion = mysqli_real_escape_string($conn,$_POST["descripcion"]);
+                $descripcion = mysqli_real_escape_string($conn,$_POST["descripcion"]);
+                $descripcion = strtoupper($descripcion);
                                                        
                             if(empty($cod_esc) || empty($descripcion)){
 				    echo "<br>";

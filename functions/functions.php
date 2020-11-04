@@ -431,9 +431,31 @@ function newContract($conn){
 		  <label for="pwd">Nivel y Grado</label>
 		  <input type="text" class="form-control" id="nivel" name="nivel" onKeyDown="limitText(this,5);" onKeyUp="limitText(this,5);" required>
 		</div>
+		
 		<div class="form-group">
-		  <label for="pwd">Organismo:</label>
-		  <input type="text" class="form-control" id="organismo" name="organismo" onkeyup="this.value=Text(this.value);" onKeyDown="limitText(this,60);" onKeyUp="limitText(this,60);" required>
+		  <label for="sel1">Organismo</label>
+		  <select class="form-control" name="organismo" required>
+		  <option value="" disabled selected>Seleccionar</option>';
+		    
+		    if($conn){
+
+		      $query = "SELECT * FROM organismos";
+		      mysqli_select_db('siadcon');
+		      $res = mysqli_query($conn,$query);
+
+		      if($res)
+		      {
+			
+			  while ($valores = mysqli_fetch_array($res))
+			    {
+				echo '<option value="'.$valores[cod_org].'">'.$valores[descripcion].'</option>';
+			    }
+			}
+			}
+
+			//mysqli_close($conn);
+		  
+		 echo '</select>
 		</div>
 		
 		<div class="form-group">
@@ -603,10 +625,32 @@ function editContract($id,$conn){
 		  <label for="pwd">Nivel y Grado</label>
 		  <input type="text" class="form-control" id="nivel" name="nivel" value="'.$fila['nivel'].'" onKeyDown="limitText(this,5);" onKeyUp="limitText(this,5);" required>
 		</div>
+		
 		<div class="form-group">
-		  <label for="pwd">Organismo</label>
-		  <input type="text" class="form-control" id="organismo" name="organismo" value="'.$fila['organismo'].'" onkeyup="this.value=Text(this.value);" onKeyDown="limitText(this,60);" onKeyUp="limitText(this,60);" required>
-		</div>
+		  <label for="sel1">Organismo:</label>
+		  <select class="form-control" name="organismo" required>
+		  
+		  <option value="" disabled selected>Seleccionar</option>';
+		    
+		    if($conn){
+		      
+		      $query = "SELECT * FROM organismos";
+		      mysqli_select_db('siadcon');
+		      $res = mysqli_query($conn,$query);
+		     
+		      if($res){
+			
+			  while ($valores = mysqli_fetch_array($res)){
+			  
+			  	echo '<option value="'.$valores[cod_org].'" '.("'.$fila[organismo].'" == "'.$valores[cod_org].'" ? "selected" : "").'>'.$valores[descripcion].'</option>';
+			    }
+			}
+			}
+
+			//mysqli_close($conn);
+			
+			echo '</select>
+			  </div>
 		
 		<div class="form-group">
 		  <label for="sel1">Jurisdicción:</label>
@@ -1244,9 +1288,6 @@ function editEscalafon($id,$conn){
 	    </div>
 	    </div>
 	</div><hr>';
-
-
-
 }
 
 
@@ -1401,6 +1442,230 @@ function escalafones($conn){
 
 
 }
+
+
+/*
+** Funcion formulario para carga de organismos
+*/
+
+function newOrganismo(){
+
+      echo '<div class="container">
+	    <div class="row">
+	    <div class="col-sm-8">
+	      <h2>Nuevo Organismo</h2><hr>
+	        <form action="../organismos/formNuevoRegistro.php" method="POST">
+	        <div class="form-group">
+		  <label for="nombre">Código Organismo</label>
+		  <input type="text" class="form-control" id="cod_esc" name="cod_org" onKeyDown="limitText(this,6);" onKeyUp="limitText(this,6);" required>
+		</div>
+		<div class="form-group">
+		  <label for="apellido">Descripción</label>
+		  <input type="text" class="form-control" id="descripcion" name="descripcion" onKeyDown="limitText(this,120);" onKeyUp="limitText(this,120);" required>
+		</div><hr>
+		
+		<button type="submit" class="btn btn-success btn-block" name="A"><img src="../../icons/devices/media-floppy.png"  class="img-reponsive img-rounded"> Guardar</button>
+	      </form> <br>
+	      
+	    </div>
+	    </div>
+	</div><hr>';
+
+}
+
+
+/*
+** Formulaio de Edición de Organismo
+*/
+
+function editOrganismo($id,$conn){
+
+    $sql = "select * from organismos where id = '$id'";
+      mysqli_select_db('siadcon');
+      $res = mysqli_query($conn,$sql);
+      $fila = mysqli_fetch_assoc($res);
+
+    echo '<div class="container">
+	    <div class="row">
+	    <div class="col-sm-8">
+	      <h2>Editar Escalafón</h2><hr>
+	        <form action="../organismos/formUpdate.php" method="POST">
+	        <input type="hidden" id="id" name="id" value="'.$fila['id'].'" />
+	        <div class="form-group">
+		  <label for="nombre">Código Organismo</label>
+		  <input type="text" class="form-control" id="cod_org" name="cod_org" onKeyDown="limitText(this,6);" onKeyUp="limitText(this,6);" value="'.$fila['cod_org'].'" required>
+		</div>
+		<div class="form-group">
+		  <label for="apellido">Descripción</label>
+		  <input type="text" class="form-control" id="descripcion" name="descripcion" onKeyDown="limitText(this,120);" onKeyUp="limitText(this,120);" value="'.$fila['descripcion'].'" required>
+		</div><hr>
+		
+		<button type="submit" class="btn btn-success btn-block" name="A"><img src="../../icons/devices/media-floppy.png"  class="img-reponsive img-rounded"> Guardar</button>
+	      </form> <a href="../main/main.php"><button type="submit" class="btn btn-primary btn-block" ><img src="../../icons/actions/arrow-left.png"  class="img-reponsive img-rounded"> Volver</button></a>
+	      <br>
+	      
+	    </div>
+	    </div>
+	</div><hr>';
+}
+
+
+
+/*
+** Agrega un registro de organismo a la base de datos
+*/
+
+function addOrganismo($cod_org,$descripcion,$conn){
+
+	mysqli_select_db('siadcon');
+	$sqlInsert = "INSERT INTO organismos ".
+		"(cod_org,descripcion)".
+		"VALUES ".
+      "('$cod_org','$descripcion')";
+           
+	$res = mysqli_query($conn,$sqlInsert);
+
+
+	if($res){
+		//mysqli_query($conn,$sqlInsert);
+		echo "<br>";
+		echo '<div class="container">';
+		echo '<div class="alert alert-success" role="alert">';
+		echo 'Registro Guardado Exitosamente. Aguarde un Instante que será Redireccionado';
+		echo "</div>";
+		echo "</div>";	
+	}else{
+		echo "<br>";
+		echo '<div class="container">';
+		echo '<div class="alert alert-warning" role="alert">';
+		echo "Hubo un error al guardar el Registro!. Aguarde un Instante que será Redireccionado" .mysqli_error($conn);
+		echo "</div>";
+		echo "</div>";
+	}
+
+
+}
+
+
+/*
+** Editar un registro de organismo en la base de datos
+*/
+
+function updateOrganismo($id,$cod_org,$descripcion,$conn){
+
+	mysqli_select_db('siadcon');
+	$sqlInsert = "UPDATE organismos set cod_org = '$cod_org', descripcion = '$descripcion' WHERE id = '$id'";
+		
+	$res = mysqli_query($conn,$sqlInsert);
+
+
+	if($res){
+		//mysqli_query($conn,$sqlInsert);
+		echo "<br>";
+		echo '<div class="container">';
+		echo '<div class="alert alert-success" role="alert">';
+		echo 'Registro Guardado Exitosamente. Aguarde un Instante que será Redireccionado';
+		echo "</div>";
+		echo "</div>";	
+	}else{
+		echo "<br>";
+		echo '<div class="container">';
+		echo '<div class="alert alert-warning" role="alert">';
+		echo "Hubo un error al guardar el Registro!. Aguarde un Instante que será Redireccionado" .mysqli_error($conn);
+		echo "</div>";
+		echo "</div>";
+	}
+
+
+}
+
+/*
+** Función que elimina un registro
+*/
+function delOrganismo($id,$conn){
+
+    mysqli_select_db('siadcon');
+	$sql = "delete from organismos where id = '$id'";
+           
+	$res = mysqli_query($conn,$sql);
+
+
+	if($res){
+		//mysqli_query($conn,$sqlInsert);
+		echo "<br>";
+		echo '<div class="container">';
+		echo '<div class="alert alert-success" role="alert">';
+		echo 'Registro Eliminado Exitosamente. Aguarde un Instante que será Redireccionado';
+		echo "</div>";
+		echo "</div>";	
+	}else{
+		echo "<br>";
+		echo '<div class="container">';
+		echo '<div class="alert alert-warning" role="alert">';
+		echo "Hubo un error al Eliminar el Registro!. Aguarde un Instante que será Redireccionado" .mysqli_error($conn);
+		echo "</div>";
+		echo "</div>";
+	}
+
+
+}
+
+
+
+/*
+** Función que lista los organismos
+*/
+
+function organismos($conn){
+
+    if($conn){
+	
+	$sql = "SELECT * FROM organismos";
+    	mysqli_select_db('siadcon');
+    	$resultado = mysqli_query($conn,$sql);
+	//mostramos fila x fila
+	$count = 0;
+	echo '<div class="panel panel-success" >
+	      <div class="panel-heading"><span class="pull-center "><img src="../../icons/places/favorites.png"  class="img-reponsive img-rounded"> Organismos';
+	echo '</div><br>';
+
+            echo "<table class='display compact' style='width:100%' id='myTable'>";
+              echo "<thead>
+		    <th class='text-nowrap text-center'>ID</th>
+		    <th class='text-nowrap text-center'>Código Organismo</th>
+                    <th class='text-nowrap text-center'>Descripción</th>
+                    <th>&nbsp;</th>
+                    </thead>";
+
+
+	while($fila = mysqli_fetch_array($resultado)){
+			  // Listado normal
+			 echo "<tr>";
+			 echo "<td align=center>".$fila['id']."</td>";
+			 echo "<td align=center>".$fila['cod_org']."</td>";
+			 echo "<td align=center>".$fila['descripcion']."</td>";
+			 echo "<td class='text-nowrap'>";
+			 echo '<a href="../organismos/editar.php?id='.$fila['id'].'" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil"></span> Editar</a>';
+			 echo '<a href="#" data-href="../organismos/eliminar.php?id='.$fila['id'].'" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span> Borrar</a><br>';
+			 echo "</td>";
+			 $count++;
+		}
+
+		echo "</table>";
+		echo "<br>";
+		echo '<button type="button" class="btn btn-primary">Cantidad de Registros:  ' .$count; echo '</button>';
+		echo '</div>';
+		}else{
+		  echo 'Connection Failure...';
+		}
+
+    mysqli_close($conn);
+
+
+}
+
+
+
 
 
 ?>

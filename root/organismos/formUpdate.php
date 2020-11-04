@@ -22,7 +22,7 @@
 
 <html><head>
 	<meta charset="utf-8">
-	<title>Escalafones - Actualizar Registro</title>
+	<title>Organismos - Actualizar Registro</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/png" href="../../icons/actions/bookmarks-organize.png" />
 	<?php skeleton();?>
@@ -61,13 +61,13 @@
 	  	
 	     if (isset($_POST['A'])){
 			    
-			    $id = mysqli_real_escape_string($conn,$_POST["id"]);
-                            $cod_esc = mysqli_real_escape_string($conn,$_POST["cod_esc"]);
+                            $id = mysqli_real_escape_string($conn,$_POST["id"]);
+                            $cod_org = mysqli_real_escape_string($conn,$_POST["cod_org"]);
                             $descripcion = mysqli_real_escape_string($conn,$_POST["descripcion"]);
                             $descripcion = strtoupper($descripcion);
-                              
-                             if(!empty($cod_esc) || !empty($descripcion)){
-                             updateEscalafon($id,$cod_esc,$descripcion,$conn);
+                                                          
+                             if(!empty($cod_org) || !empty($descripcion)){
+                             updateOrganismo($id,$cod_org,$descripcion,$conn);
 			      }else{
 				    echo "<br>";
 				    echo '<div class="container">';

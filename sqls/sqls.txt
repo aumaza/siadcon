@@ -18,6 +18,13 @@ cod_jur varchar(3) not null,
 descripcion varchar(60) not null
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+#crear tabla organismos
+create table organismos (
+id int(11) auto_increment primary key,
+cod_org  varchar(4) not null,
+descripcion varchar(120) not null
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 #subir csv contratos
 load data local infile '/var/www/htdocs/siadcon/sqls/contratos.csv' 
@@ -28,3 +35,8 @@ into table contratos fields terminated by ',' enclosed by '"' lines terminated b
 load data local infile '/var/www/htdocs/siadcon/sqls/jurisdiccion.csv' 
 into table jurisdiccion fields terminated by ',' enclosed by '"' lines terminated by '\n'
 (cod_jur,descripcion);
+
+#subir csv organismos
+load data local infile '/var/www/html/siadcon/sqls/organismos.csv' 
+into table organismos fields terminated by ',' enclosed by '"' lines terminated by '\n'
+(cod_org,descripcion);

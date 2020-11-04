@@ -206,9 +206,17 @@ $(document).ready(function(){
     <div class="col-sm-2 sidenav">
       <form action="main.php" method="POST">
 	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Editar Datos Personales"><button type="submit" class="btn btn-default btn-sm" name="A"><img class="img-reponsive img-rounded" src="../../icons/actions/user-group-properties.png" /> Mis Datos</button></a><hr>
+	 
 	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Administrar Usuarios"><button type="submit" class="btn btn-default btn-sm" name="B"><img class="img-reponsive img-rounded" src="../../icons/actions/user-group-properties.png" /> Usuarios</button></a><hr>
+	 
 	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Agregar Escalafón"><button type="submit" class="btn btn-default btn-sm" name="D"><img class="img-reponsive img-rounded" src="../../icons/actions/list-add.png" /> Escalafón</button></a><hr>
+	 
 	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Listar Escalafones"><button type="submit" class="btn btn-default btn-sm" name="E"><img class="img-reponsive img-rounded" src="../../icons/places/favorites.png" /> Escalafones</button></a><hr>
+	 
+	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Agregar Organismo"><button type="submit" class="btn btn-default btn-sm" name="F"><img class="img-reponsive img-rounded" src="../../icons/actions/list-add.png" /> Organismo</button></a><hr>
+	 
+	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Listar Organismos"><button type="submit" class="btn btn-default btn-sm" name="G"><img class="img-reponsive img-rounded" src="../../icons/places/favorites.png" /> Organismos</button></a><hr>
+	 
 	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Backup de Archivos Subidos"><button type="submit" class="btn btn-default btn-sm" name="C"><img class="img-reponsive img-rounded" src="../../icons/apps/utilities-file-archiver.png" /> BackUp</button></a>
 	</form>
 	</div>
@@ -233,6 +241,12 @@ $(document).ready(function(){
       }
       if(isset($_POST['E'])){
 	    escalafones($conn);
+      }
+      if(isset($_POST['F'])){
+        newOrganismo();
+      }
+      if(isset($_POST['G'])){
+        organismos($conn);
       }
       
    
