@@ -58,7 +58,8 @@
 	mysqli_select_db('siadcon');
 	  	
 	     if (isset($_POST['A'])) {
-			    $cod_esc = mysqli_real_escape_string($conn,$_POST["cod_org"]);
+			    $cod_org = mysqli_real_escape_string($conn,$_POST["cod_org"]);
+			    $cod_org = strtoupper($cod_org);
                 $descripcion = mysqli_real_escape_string($conn,$_POST["descripcion"]);
                 $descripcion = strtoupper($descripcion);
                                                        

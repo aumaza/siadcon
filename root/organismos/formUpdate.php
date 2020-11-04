@@ -63,6 +63,7 @@
 			    
                             $id = mysqli_real_escape_string($conn,$_POST["id"]);
                             $cod_org = mysqli_real_escape_string($conn,$_POST["cod_org"]);
+                            $cod_org = strtoupper($cod_org);
                             $descripcion = mysqli_real_escape_string($conn,$_POST["descripcion"]);
                             $descripcion = strtoupper($descripcion);
                                                           
