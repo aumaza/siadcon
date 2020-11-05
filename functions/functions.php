@@ -1248,7 +1248,7 @@ function dumpMysql($conn){
     $target_dir = "../../sqls";
     $dbname = "siadcon";
     $file = $dbname . date("d-m-Y") . '.sql';
-    $dump = "mysqldump --user=siadcon --password=siadcon $dbname > $file";
+    $dump = "mysqldump --user='siadcon' --password='siadcon' siadcon > $file";
 	$command = system($dump);
 	
 	copy($file, "$target_dir/$file");
