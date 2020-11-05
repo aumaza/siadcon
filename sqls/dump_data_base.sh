@@ -2,5 +2,6 @@
 fecha=`date +%d%m%Y`
 archivo="siadcon-$fecha.sql"
 mysqldump --user=siadcon --password=siadcon siadcon > $archivo
-echo -e "Database Backing Up Successfully \n"
-echo "File storage Successfully"
+mv $archivo sqls/
+echo -e "Database Backing Up Successfully \n File storage Successfully"
+
