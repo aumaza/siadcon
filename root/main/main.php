@@ -322,7 +322,7 @@ $(document).ready(function(){
         jurisdicciones($conn);
       }
       if(isset($_POST['J'])){
-        dumpMysql();
+        dumpMysql($conn);
       }
       
       

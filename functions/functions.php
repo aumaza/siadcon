@@ -1241,12 +1241,34 @@ function backup(){
 /*
 ** funcion para realizar backup de base de datos
 */
-function dumpMysql(){
+function dumpMysql($conn){
 
-	 $message=shell_exec("../../dump_data_base.sh");
+    if($conn){
+    
+    $target_dir = "../../sqls";
+    $dbname = "siadcon";
+    $file = $dbname . date("d-m-Y") . '.sql';
+    $dump = "mysqldump --user='$dbname' --password='$dbname' $dbname > $file";
+	$command = system($dump);
+	
+	copy($file, "$target_dir/$file");
+    unlink($file);
+	
+	
+	if($command){
          echo '<div class="alert alert-success" role="alert">';
-	 echo '<h1 class="panel-title text-left" contenteditable="true"><img src="../../icons/actions/dialog-ok-apply.png"  class="img-reponsive img-rounded"><strong> '.print_r($message).'</strong></h1>';
+        echo '<h1 class="panel-title text-left" contenteditable="true"><img src="../../icons/actions/dialog-ok-apply.png"  class="img-reponsive img-rounded"><strong> Dump Successfully!!!</strong></h1>';
          echo "</div>";
+         }else{
+            echo '<div class="alert alert-danger" role="alert">';
+            echo '<h1 class="panel-title text-left" contenteditable="true"><img src="../../icons/status/task-attempt.png"                   class="img-reponsive img-rounded"><strong> Error al Realizar el Dump</strong></h1>';
+         }
+         }else{
+            
+            echo '<div class="alert alert-danger" role="alert">';
+            echo '<h1 class="panel-title text-left" contenteditable="true"><img src="../../icons/actions/dialog-ok-apply.png"                   class="img-reponsive img-rounded"><strong>'. mysqli_error($conn). '</strong></h1>';
+         
+         }
          
 
 }
