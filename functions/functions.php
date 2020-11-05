@@ -1245,11 +1245,12 @@ function dumpMysql($conn){
 
     if($conn){
     
-    $target_dir = "../../sqls";
+    $target_dir = "../../files";
     $dbname = "siadcon";
     $file = $dbname . date("d-m-Y") . '.sql';
-    $dump = "mysqldump --user='siadcon' --password='siadcon' siadcon > $file";
+    $dump = "mysqldump --user=siadcon --password=siadcon siadcon > $file";
 	$command = system($dump);
+	chmod($file, 0777);
 	
 	copy($file, "$target_dir/$file");
     unlink($file);
