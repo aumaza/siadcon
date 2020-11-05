@@ -277,7 +277,7 @@ $(document).ready(function(){
     <div id="collapse5" class="panel-collapse collapse">
       <div class="panel-body">
       <a href="main.php" data-toggle="tooltip" data-placement="right" title="Backup de Archivos Subidos"><button type="submit" class="btn btn-default btn-sm" name="C"><img class="img-reponsive img-rounded" src="../../icons/apps/utilities-file-archiver.png" /> BackUp</button></a><hr>
-      <a href="main.php" data-toggle="tooltip" data-placement="right" title="Backup Base de Datos"><button type="submit" class="btn btn-default btn-sm" name="H"><img class="img-reponsive img-rounded" src="../../icons/actions/svn-update.png" /> BackUp Base</button></a>
+      <a href="main.php" data-toggle="tooltip" data-placement="right" title="Backup Base de Datos"><button type="submit" class="btn btn-default btn-sm" name="J"><img class="img-reponsive img-rounded" src="../../icons/actions/svn-update.png" /> BackUp Base</button></a>
       
       </div>
     </div>
@@ -321,12 +321,11 @@ $(document).ready(function(){
       if(isset($_POST['I'])){
         jurisdicciones($conn);
       }
-      if(isset($_POST['H'])){
+      if(isset($_POST['J'])){
         dumpMysql();
       }
       
-   
-   
+      
    ?>
       
       
