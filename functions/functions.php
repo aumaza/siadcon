@@ -1245,17 +1245,17 @@ function dumpMysql($conn){
 
     if($conn){
     
-    $target_dir = "../../sqls";
+    //$target_dir = "../../sqls";
     $dbname = "siadcon";
     $file = $dbname . date("d-m-Y") . '.sql';
-    $dump = "mysqldump -u siadcon -p siadcon siadcon > $file";
+    $dump = "mysqldump --user=siadcon --password=siadcon siadcon > $file";
 	$command = system($dump);
 	chmod($file, 0777);
 	
 	if($command){
 	
-        copy($file, "$target_dir/$file");
-        unlink($file);
+        //copy($file, "$target_dir/$file");
+        //unlink($file);
          echo '<div class="alert alert-success" role="alert">';
         echo '<h1 class="panel-title text-left" contenteditable="true"><img src="../../icons/actions/dialog-ok-apply.png"  class="img-reponsive img-rounded"><strong> Dump Successfully!!!</strong></h1>';
          echo "</div>";
