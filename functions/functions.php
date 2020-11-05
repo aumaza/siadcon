@@ -1243,7 +1243,7 @@ function backup(){
 */
 function dumpMysql(){
 
-	 $message=shell_exec("../../dump_data_base.sh");
+	 $message=shell_exec("../../sqls/dump_data_base.sh");
          echo '<div class="alert alert-success" role="alert">';
 	 echo '<h1 class="panel-title text-left" contenteditable="true"><img src="../../icons/actions/dialog-ok-apply.png"  class="img-reponsive img-rounded"><strong> '.print_r($message).'</strong></h1>';
          echo "</div>";
