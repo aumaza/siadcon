@@ -205,19 +205,84 @@ $(document).ready(function(){
   <div class="row content">
     <div class="col-sm-2 sidenav">
       <form action="main.php" method="POST">
-	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Editar Datos Personales"><button type="submit" class="btn btn-default btn-sm" name="A"><img class="img-reponsive img-rounded" src="../../icons/actions/user-group-properties.png" /> Mis Datos</button></a><hr>
+      
+       <div class="panel-group" id="accordion">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
+        Administrar Usuarios</a>
+      </h4>
+    </div>
+    <div id="collapse1" class="panel-collapse collapse">
+      <div class="panel-body">
+      <a href="main.php" data-toggle="tooltip" data-placement="right" title="Editar Datos Personales"><button type="submit" class="btn btn-default btn-sm" name="A"><img class="img-reponsive img-rounded" src="../../icons/actions/user-group-properties.png" /> Mis Datos</button></a><hr>
 	 
-	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Administrar Usuarios"><button type="submit" class="btn btn-default btn-sm" name="B"><img class="img-reponsive img-rounded" src="../../icons/actions/user-group-properties.png" /> Usuarios</button></a><hr>
+	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Administrar Usuarios"><button type="submit" class="btn btn-default btn-sm" name="B"><img class="img-reponsive img-rounded" src="../../icons/actions/user-group-properties.png" /> Usuarios</button></a>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse2">
+        Administrar Escalafones</a>
+      </h4>
+    </div>
+    <div id="collapse2" class="panel-collapse collapse">
+      <div class="panel-body">
+      <a href="main.php" data-toggle="tooltip" data-placement="right" title="Agregar Escalafón"><button type="submit" class="btn btn-default btn-sm" name="D"><img class="img-reponsive img-rounded" src="../../icons/actions/list-add.png" /> Escalafón</button></a><hr>
 	 
-	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Agregar Escalafón"><button type="submit" class="btn btn-default btn-sm" name="D"><img class="img-reponsive img-rounded" src="../../icons/actions/list-add.png" /> Escalafón</button></a><hr>
+	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Listar Escalafones"><button type="submit" class="btn btn-default btn-sm" name="E"><img class="img-reponsive img-rounded" src="../../icons/places/favorites.png" /> Escalafones</button></a>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse3">
+        Administrar Organismos</a>
+      </h4>
+    </div>
+    <div id="collapse3" class="panel-collapse collapse">
+      <div class="panel-body">
+      <a href="main.php" data-toggle="tooltip" data-placement="right" title="Agregar Organismo"><button type="submit" class="btn btn-default btn-sm" name="F"><img class="img-reponsive img-rounded" src="../../icons/actions/list-add.png" /> Organismo</button></a><hr>
 	 
-	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Listar Escalafones"><button type="submit" class="btn btn-default btn-sm" name="E"><img class="img-reponsive img-rounded" src="../../icons/places/favorites.png" /> Escalafones</button></a><hr>
+	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Listar Organismos"><button type="submit" class="btn btn-default btn-sm" name="G"><img class="img-reponsive img-rounded" src="../../icons/places/favorites.png" /> Organismos</button></a>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse4">
+        Administrar Jurisdicciones</a>
+      </h4>
+    </div>
+    <div id="collapse4" class="panel-collapse collapse">
+      <div class="panel-body">
+      <a href="main.php" data-toggle="tooltip" data-placement="right" title="Agregar Jurisdicción"><button type="submit" class="btn btn-default btn-sm" name="H"><img class="img-reponsive img-rounded" src="../../icons/actions/list-add.png" /> Jurisdicción</button></a><hr>
 	 
-	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Agregar Organismo"><button type="submit" class="btn btn-default btn-sm" name="F"><img class="img-reponsive img-rounded" src="../../icons/actions/list-add.png" /> Organismo</button></a><hr>
-	 
-	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Listar Organismos"><button type="submit" class="btn btn-default btn-sm" name="G"><img class="img-reponsive img-rounded" src="../../icons/places/favorites.png" /> Organismos</button></a><hr>
-	 
-	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Backup de Archivos Subidos"><button type="submit" class="btn btn-default btn-sm" name="C"><img class="img-reponsive img-rounded" src="../../icons/apps/utilities-file-archiver.png" /> BackUp</button></a>
+	 <a href="main.php" data-toggle="tooltip" data-placement="right" title="Listar Jurisicciones"><button type="submit" class="btn btn-default btn-sm" name="I"><img class="img-reponsive img-rounded" src="../../icons/places/favorites.png" /> Jurisdicciones</button></a>
+      </div>
+    </div>
+  </div>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
+        Mantenimiento</a>
+      </h4>
+    </div>
+    <div id="collapse5" class="panel-collapse collapse">
+      <div class="panel-body">
+      <a href="main.php" data-toggle="tooltip" data-placement="right" title="Backup de Archivos Subidos"><button type="submit" class="btn btn-default btn-sm" name="C"><img class="img-reponsive img-rounded" src="../../icons/apps/utilities-file-archiver.png" /> BackUp</button></a>
+      </div>
+    </div>
+  </div>
+  
+</div> 
+    
 	</form>
 	</div>
     <div class="col-sm-10 text-left"> 
@@ -248,6 +313,12 @@ $(document).ready(function(){
       if(isset($_POST['G'])){
         organismos($conn);
       }
+      if(isset($_POST['H'])){
+        newJurisdiccion();
+      }
+      if(isset($_POST['I'])){
+        jurisdicciones($conn);
+      }
       
    
    
@@ -259,7 +330,7 @@ $(document).ready(function(){
      </div>
  
   </div>
-</div><br><br><br><br><br><br><br>
+</div><br>
 
 <footer class="container-fluid text-center">
   <p><img class="img-reponsive img-rounded" src="../../img/escudo32x32.png" /> Ministerio de Economía de la Nación - Dirección de Presupuesto y Evaluación de Gastos en Personal</p>
