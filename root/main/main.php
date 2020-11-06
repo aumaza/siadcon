@@ -267,6 +267,7 @@ $(document).ready(function(){
       </div>
     </div>
   </div>
+  
   <div class="panel panel-default">
     <div class="panel-heading">
       <h4 class="panel-title">
@@ -278,6 +279,22 @@ $(document).ready(function(){
       <div class="panel-body">
       <a href="main.php" data-toggle="tooltip" data-placement="right" title="Backup de Archivos Subidos"><button type="submit" class="btn btn-default btn-sm" name="C"><img class="img-reponsive img-rounded" src="../../icons/apps/utilities-file-archiver.png" /> BackUp</button></a><hr>
       <a href="main.php" data-toggle="tooltip" data-placement="right" title="Backup Base de Datos"><button type="submit" class="btn btn-default btn-sm" name="J"><img class="img-reponsive img-rounded" src="../../icons/actions/svn-update.png" /> BackUp Base</button></a>
+      
+      </div>
+    </div>
+  </div>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h4 class="panel-title">
+        <a data-toggle="collapse" data-parent="#accordion" href="#collapse6">
+        Administrar Niveles</a>
+      </h4>
+    </div>
+    <div id="collapse6" class="panel-collapse collapse">
+      <div class="panel-body">
+      <a href="main.php" data-toggle="tooltip" data-placement="right" title="Cargar Nuevo Nivel"><button type="submit" class="btn btn-default btn-sm" name="K"><img class="img-reponsive img-rounded" src="../../icons/actions/list-add.png" /> Nivel</button></a><hr>
+      <a href="main.php" data-toggle="tooltip" data-placement="right" title="Listar Niveles"><button type="submit" class="btn btn-default btn-sm" name="L"><img class="img-reponsive img-rounded" src="../../icons/places/favorites.png" /> Niveles</button></a>
       
       </div>
     </div>
@@ -323,6 +340,12 @@ $(document).ready(function(){
       }
       if(isset($_POST['J'])){
         dumpMysql($conn);
+      }
+      if(isset($_POST['K'])){
+        newNivel();
+      }
+      if(isset($_POST['L'])){
+        niveles($conn);
       }
       
       

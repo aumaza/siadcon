@@ -25,6 +25,13 @@ cod_org  varchar(4) not null,
 descripcion varchar(120) not null
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+#crear tabla niveles
+create table niveles (
+id int(11) auto_increment primary key,
+cod_nivel  varchar(120) not null,
+descripcion varchar(120) not null
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 
 #subir csv contratos
 load data local infile '/var/www/htdocs/siadcon/sqls/contratos.csv' 
@@ -40,3 +47,8 @@ into table jurisdiccion fields terminated by ',' enclosed by '"' lines terminate
 load data local infile '/usr/local/www/html/siadcon/sqls/organismos.csv' 
 into table organismos fields terminated by ',' enclosed by '"' lines terminated by '\n'
 (cod_org,descripcion);
+
+#subir csv niveles
+load data local infile '/usr/local/www/html/siadcon/sqls/niveles.csv' 
+into table niveles fields terminated by ',' enclosed by '"' lines terminated by '\n'
+(cod_nivel,descripcion);

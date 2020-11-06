@@ -429,8 +429,29 @@ function newContract($conn){
 		</div>
 		
 		<div class="form-group">
-		  <label for="pwd">Nivel y Grado</label>
-		  <input type="text" class="form-control" id="nivel" name="nivel" onKeyDown="limitText(this,5);" onKeyUp="limitText(this,5);" required>
+		  <label for="sel1">Niveles:</label>
+		  <select class="form-control" name="nivel" required>
+		  <option value="" disabled selected>Seleccionar</option>';
+		    
+		    if($conn){
+
+		      $query = "SELECT * FROM niveles";
+		      mysqli_select_db('siadcon');
+		      $res = mysqli_query($conn,$query);
+
+		      if($res)
+		      {
+			
+			  while ($valores = mysqli_fetch_array($res))
+			    {
+				echo '<option value="'.$valores[cod_nivel].'">'.$valores[descripcion].'</option>';
+			    }
+			}
+			}
+
+			//mysqli_close($conn);
+		  
+		 echo '</select>
 		</div>
 		
 		<div class="form-group">
@@ -624,9 +645,30 @@ function editContract($id,$conn){
 		
 		
 		<div class="form-group">
-		  <label for="pwd">Nivel y Grado</label>
-		  <input type="text" class="form-control" id="nivel" name="nivel" value="'.$fila['nivel'].'" onKeyDown="limitText(this,5);" onKeyUp="limitText(this,5);" required>
-		</div>
+		  <label for="sel1">Niveles:</label>
+		  <select class="form-control" name="nivel" required>
+		  
+		  <option value="" disabled selected>Seleccionar</option>';
+		    
+		    if($conn){
+		      
+		      $query = "SELECT * FROM niveles";
+		      mysqli_select_db('siadcon');
+		      $res = mysqli_query($conn,$query);
+		     
+		      if($res){
+			
+			  while ($valores = mysqli_fetch_array($res)){
+			  
+			  	echo '<option value="'.$valores[cod_nivel].'" '.("'.$fila[nivel].'" == "'.$valores[cod_nivel].'" ? "selected" : "").'>'.$valores[descripcion].'</option>';
+			    }
+			}
+			}
+
+			//mysqli_close($conn);
+			
+			echo '</select>
+			  </div>
 		
 		<div class="form-group">
 		  <label for="sel1">Organismo:</label>
@@ -1934,5 +1976,228 @@ function jurisdicciones($conn){
 
 
 }
+
+
+//////////////////////////  SECCION NIVELES ////////////////////////////////////
+
+/*
+** Funcion formulario para carga de niveles
+*/
+
+function newNivel(){
+
+      echo '<div class="container">
+	    <div class="row">
+	    <div class="col-sm-8">
+	      <h2>Nuevo Nivel</h2><hr>
+	        <form action="../niveles/formNuevoRegistro.php" method="POST">
+	        <div class="form-group">
+		  <label for="nombre">Código Nivel</label>
+		  <input type="text" class="form-control" id="cod_nivel" name="cod_nivel" onKeyDown="limitText(this,120);" onKeyUp="limitText(this,120);" required>
+		</div>
+		<div class="form-group">
+		  <label for="descripcion">Descripción</label>
+		  <input type="text" class="form-control" id="descripcion" name="descripcion" onKeyDown="limitText(this,120);" onKeyUp="limitText(this,120);" required>
+		</div><hr>
+		
+		<button type="submit" class="btn btn-success btn-block" name="A"><img src="../../icons/devices/media-floppy.png"  class="img-reponsive img-rounded"> Guardar</button>
+	      </form> <br>
+	      
+	    </div>
+	    </div>
+	</div><hr>';
+
+}
+
+
+/*
+** Formulaio de Edición de Niveles
+*/
+
+function editNivel($id,$conn){
+
+    $sql = "select * from niveles where id = '$id'";
+      mysqli_select_db('siadcon');
+      $res = mysqli_query($conn,$sql);
+      $fila = mysqli_fetch_assoc($res);
+
+    echo '<div class="container">
+	    <div class="row">
+	    <div class="col-sm-8">
+	      <h2>Editar Niveles</h2><hr>
+	        <form action="../niveles/formUpdate.php" method="POST">
+	        <input type="hidden" id="id" name="id" value="'.$fila['id'].'" />
+	        <div class="form-group">
+		  <label for="nombre">Código Nivel</label>
+		  <input type="text" class="form-control" id="cod_nivel" name="cod_nivel" onKeyDown="limitText(this,120);" onKeyUp="limitText(this,120);" value="'.$fila['cod_nivel'].'" required>
+		</div>
+		<div class="form-group">
+		  <label for="apellido">Descripción</label>
+		  <input type="text" class="form-control" id="descripcion" name="descripcion" onKeyDown="limitText(this,120);" onKeyUp="limitText(this,120);" value="'.$fila['descripcion'].'" required>
+		</div><hr>
+		
+		<button type="submit" class="btn btn-success btn-block" name="A"><img src="../../icons/devices/media-floppy.png"  class="img-reponsive img-rounded"> Guardar</button>
+	      </form> <a href="../main/main.php"><button type="submit" class="btn btn-primary btn-block" ><img src="../../icons/actions/arrow-left.png"  class="img-reponsive img-rounded"> Volver</button></a>
+	      <br>
+	      
+	    </div>
+	    </div>
+	</div><hr>';
+}
+
+
+/*
+** Agrega un registro de niveles a la base de datos
+*/
+
+function addNivel($cod_nivel,$descripcion,$conn){
+
+	mysqli_select_db('siadcon');
+	$sqlInsert = "INSERT INTO niveles ".
+		"(cod_nivel,descripcion)".
+		"VALUES ".
+      "('$cod_nivel','$descripcion')";
+           
+	$res = mysqli_query($conn,$sqlInsert);
+
+
+	if($res){
+		//mysqli_query($conn,$sqlInsert);
+		echo "<br>";
+		echo '<div class="container">';
+		echo '<div class="alert alert-success" role="alert">';
+		echo 'Registro Guardado Exitosamente. Aguarde un Instante que será Redireccionado';
+		echo "</div>";
+		echo "</div>";	
+	}else{
+		echo "<br>";
+		echo '<div class="container">';
+		echo '<div class="alert alert-warning" role="alert">';
+		echo "Hubo un error al guardar el Registro!. Aguarde un Instante que será Redireccionado" .mysqli_error($conn);
+		echo "</div>";
+		echo "</div>";
+	}
+
+
+}
+
+
+/*
+** Editar un registro de niveles en la base de datos
+*/
+
+function updateNivel($id,$cod_nivel,$descripcion,$conn){
+
+	mysqli_select_db('siadcon');
+	$sqlInsert = "UPDATE niveles set cod_nivel = '$cod_nivel', descripcion = '$descripcion' WHERE id = '$id'";
+		
+	$res = mysqli_query($conn,$sqlInsert);
+
+
+	if($res){
+		//mysqli_query($conn,$sqlInsert);
+		echo "<br>";
+		echo '<div class="container">';
+		echo '<div class="alert alert-success" role="alert">';
+		echo 'Registro Guardado Exitosamente. Aguarde un Instante que será Redireccionado';
+		echo "</div>";
+		echo "</div>";	
+	}else{
+		echo "<br>";
+		echo '<div class="container">';
+		echo '<div class="alert alert-warning" role="alert">';
+		echo "Hubo un error al guardar el Registro!. Aguarde un Instante que será Redireccionado" .mysqli_error($conn);
+		echo "</div>";
+		echo "</div>";
+	}
+
+
+}
+
+/*
+** Función que elimina un registro
+*/
+function delNivel($id,$conn){
+
+    mysqli_select_db('siadcon');
+	$sql = "delete from niveles where id = '$id'";
+           
+	$res = mysqli_query($conn,$sql);
+
+
+	if($res){
+		//mysqli_query($conn,$sqlInsert);
+		echo "<br>";
+		echo '<div class="container">';
+		echo '<div class="alert alert-success" role="alert">';
+		echo 'Registro Eliminado Exitosamente. Aguarde un Instante que será Redireccionado';
+		echo "</div>";
+		echo "</div>";	
+	}else{
+		echo "<br>";
+		echo '<div class="container">';
+		echo '<div class="alert alert-warning" role="alert">';
+		echo "Hubo un error al Eliminar el Registro!. Aguarde un Instante que será Redireccionado" .mysqli_error($conn);
+		echo "</div>";
+		echo "</div>";
+	}
+
+
+}
+
+
+
+/*
+** Función que lista las jurisdicciones
+*/
+
+function niveles($conn){
+
+    if($conn){
+	
+	$sql = "SELECT * FROM niveles";
+    	mysqli_select_db('siadcon');
+    	$resultado = mysqli_query($conn,$sql);
+	//mostramos fila x fila
+	$count = 0;
+	echo '<div class="panel panel-success" >
+	      <div class="panel-heading"><span class="pull-center "><img src="../../icons/places/favorites.png"  class="img-reponsive img-rounded"> Niveles';
+	echo '</div><br>';
+
+            echo "<table class='display compact' style='width:100%' id='myTable'>";
+              echo "<thead>
+		    <th class='text-nowrap text-center'>ID</th>
+		    <th class='text-nowrap text-center'>Código Nivel</th>
+                    <th class='text-nowrap text-center'>Descripción</th>
+                    <th>&nbsp;</th>
+                    </thead>";
+
+
+	while($fila = mysqli_fetch_array($resultado)){
+			  // Listado normal
+			 echo "<tr>";
+			 echo "<td align=center>".$fila['id']."</td>";
+			 echo "<td align=center>".$fila['cod_nivel']."</td>";
+			 echo "<td align=center>".$fila['descripcion']."</td>";
+			 echo "<td class='text-nowrap'>";
+			 echo '<a href="../niveles/editar.php?id='.$fila['id'].'" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-pencil"></span> Editar</a>';
+			 echo '<a href="#" data-href="../niveles/eliminar.php?id='.$fila['id'].'" data-toggle="modal" data-target="#confirm-delete" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span> Borrar</a><br>';
+			 echo "</td>";
+			 $count++;
+		}
+
+		echo "</table>";
+		echo "<br>";
+		echo '<button type="button" class="btn btn-primary">Cantidad de Registros:  ' .$count; echo '</button>';
+		echo '</div>';
+		}else{
+		  echo 'Connection Failure...';
+		}
+
+    mysqli_close($conn);
+
+
+}
+
 
 ?>
