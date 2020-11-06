@@ -592,7 +592,7 @@ function editContract($id,$conn){
 		    <option value="002" '.($fila['t_contratacion'] == "002" ? "selected" : ""). '>3 - Renovación (cod. 002)</option>
 		    <option value="003" '.($fila['t_contratacion'] == "003" ? "selected" : ""). '>4 - Designación Transitoria (cod. 003)</option>
 		    <option value="004" '.($fila['t_contratacion'] == "004" ? "selected" : ""). '>5 - Horas Cátedra (cod. 004)</option>
-		    <option value="005" '.($fila['t_contratacion'] == "005" ? "selected" : ""). '>5 - Movilidad Interna (cod. 005)</option>
+		    <option value="005" '.($fila['t_contratacion'] == "005" ? "selected" : ""). '>6 - Movilidad Interna (cod. 005)</option>
 		    </select>
 		  </div>
 		
