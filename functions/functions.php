@@ -393,11 +393,12 @@ function newContract($conn){
 		  <label for="sel1">Tipo Contratación</label>
 		  <select class="form-control" name="t_contratacion">
 		    <option value="" disabled selected>Seleccionar</option>
-		    <option value="000">1 - No Especifíca</option>
-		    <option value="001">2 - Nueva Contratación</option>
-		    <option value="002">3 - Renovación</option>
-		    <option value="003">4 - Designación Transitoria</option>
-		    <option value="004">5 - Horas Cátedra</option>
+		    <option value="000">1 - No Especifíca (cod. 000)</option>
+		    <option value="001">2 - Nueva Contratación (cod. 001)</option>
+		    <option value="002">3 - Renovación (cod. 002)</option>
+		    <option value="003">4 - Designación Transitoria (cod. 003)</option>
+		    <option value="004">5 - Horas Cátedra (cod. 004)</option>
+		    <option value="005">6 - Movilidad Interna (cod. 005)</option>
 		    </select>
 		  </div>
 		  
@@ -586,11 +587,12 @@ function editContract($id,$conn){
 		  <label for="sel1">Tipo Contratación</label>
 		  <select class="form-control" name="t_contratacion">
 		    <option value="" disabled selected>Seleccionar</option>
-		    <option value="000" '.($fila['t_contratacion'] == "000" ? "selected" : ""). '>1 - No Especifíca</option>
-		    <option value="001" '.($fila['t_contratacion'] == "001" ? "selected" : ""). '>2 - Nueva Contratación</option>
-		    <option value="002" '.($fila['t_contratacion'] == "002" ? "selected" : ""). '>3 - Renovación</option>
-		    <option value="003" '.($fila['t_contratacion'] == "003" ? "selected" : ""). '>4 - Designación Transitoria</option>
-		    <option value="004" '.($fila['t_contratacion'] == "004" ? "selected" : ""). '>5 - Horas Cátedra</option>
+		    <option value="000" '.($fila['t_contratacion'] == "000" ? "selected" : ""). '>1 - No Especifíca (cod. 000)</option>
+		    <option value="001" '.($fila['t_contratacion'] == "001" ? "selected" : ""). '>2 - Nueva Contratación (cod. 001)</option>
+		    <option value="002" '.($fila['t_contratacion'] == "002" ? "selected" : ""). '>3 - Renovación (cod. 002)</option>
+		    <option value="003" '.($fila['t_contratacion'] == "003" ? "selected" : ""). '>4 - Designación Transitoria (cod. 003)</option>
+		    <option value="004" '.($fila['t_contratacion'] == "004" ? "selected" : ""). '>5 - Horas Cátedra (cod. 004)</option>
+		    <option value="005" '.($fila['t_contratacion'] == "005" ? "selected" : ""). '>5 - Movilidad Interna (cod. 005)</option>
 		    </select>
 		  </div>
 		
