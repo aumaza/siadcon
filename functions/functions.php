@@ -1312,6 +1312,181 @@ function dumpMysql($conn){
 }
 
 
+/*
+** Funcion generadora de archivo Excel
+*/
+
+function genExcel($data,$conn){
+
+    if($conn){
+    
+    if($data == 'niveles'){
+	
+	$sql = "SELECT * FROM niveles";
+            
+	mysqli_select_db('siadcon');
+	$resval = mysqli_query($conn,$sql);
+	
+	$file = "niveles.xls";
+	
+	if (mysqli_num_rows($resval) != 0){
+	  $jump = "\r\n";
+	  $separator = ",";
+	  $fp = fopen('../../files/'.$file, 'w');
+	 	  
+	  while($row = mysqli_fetch_array($resval)) {
+	  $registro =  $row['cod_nivel'] .$separator. $row['descripcion'] . $jump;
+	  fwrite($fp, $registro);
+	  }
+	  
+	  fclose($fp);
+	  chmod($file, 0777);
+	  
+	  
+	  if($file){
+	     $path = '../../files/'.$file;
+	  
+	  if(is_file($path)){
+	    header('Content-Type: application/force-download');
+	    header('Content-Disposition: attachment; filename='.$file);
+	    header('Content-Transfer-Encoding: binary');
+	    header('Content-Length: '.filesize($path));
+
+	    readfile($path);
+	  }
+	  }else{
+	    exit();
+	    }
+	    
+	   }
+	   }// end if niveles
+	   if($data == 'jurisdiccion'){
+	
+	$sql = "SELECT * FROM jurisdiccion";
+            
+	mysqli_select_db('siadcon');
+	$resval = mysqli_query($conn,$sql);
+	
+	$file = "jurisdicciones.xls";
+	
+	if (mysqli_num_rows($resval) != 0){
+	  $jump = "\r\n";
+	  $separator = ",";
+	  $fp = fopen('../../files/'.$file, 'w');
+	 	  
+	  while($row = mysqli_fetch_array($resval)) {
+	  $registro =  $row['cod_jur'] .$separator. $row['descripcion'] . $jump;
+	  fwrite($fp, $registro);
+	  }
+	  
+	  fclose($fp);
+	  chmod($file, 0777);
+	  
+	  
+	  if($file){
+	     $path = '../../files/'.$file;
+	  
+	  if(is_file($path)){
+	    header('Content-Type: application/force-download');
+	    header('Content-Disposition: attachment; filename='.$file);
+	    header('Content-Transfer-Encoding: binary');
+	    header('Content-Length: '.filesize($path));
+
+	    readfile($path);
+	  }
+	  }else{
+	    exit();
+	    }
+	    
+	   }
+	   }// end if jurisdicciones
+	   if($data == 'organismos'){
+	
+	$sql = "SELECT * FROM organismos";
+            
+	mysqli_select_db('siadcon');
+	$resval = mysqli_query($conn,$sql);
+	
+	$file = "organismos.xls";
+	
+	if (mysqli_num_rows($resval) != 0){
+	  $jump = "\r\n";
+	  $separator = ",";
+	  $fp = fopen('../../files/'.$file, 'w');
+	 	  
+	  while($row = mysqli_fetch_array($resval)) {
+	  $registro =  $row['cod_org'] .$separator. $row['descripcion'] . $jump;
+	  fwrite($fp, $registro);
+	  }
+	  
+	  fclose($fp);
+	  chmod($file, 0777);
+	  
+	  
+	  if($file){
+	     $path = '../../files/'.$file;
+	  
+	  if(is_file($path)){
+	    header('Content-Type: application/force-download');
+	    header('Content-Disposition: attachment; filename='.$file);
+	    header('Content-Transfer-Encoding: binary');
+	    header('Content-Length: '.filesize($path));
+
+	    readfile($path);
+	  }
+	  }else{
+	    exit();
+	    }
+	    
+	   }
+	   }//end if organismos
+	   if($data == 'escalafones'){
+	
+	$sql = "SELECT * FROM escalafones";
+            
+	mysqli_select_db('siadcon');
+	$resval = mysqli_query($conn,$sql);
+	
+	$file = "escalafones.xls";
+	
+	if (mysqli_num_rows($resval) != 0){
+	  $jump = "\r\n";
+	  $separator = ",";
+	  $fp = fopen('../../files/'.$file, 'w');
+	 	  
+	  while($row = mysqli_fetch_array($resval)) {
+	  $registro =  $row['cod_esc'] .$separator. $row['descripcion'] . $jump;
+	  fwrite($fp, $registro);
+	  }
+	  
+	  fclose($fp);
+	  chmod($file, 0777);
+	  
+	  
+	  if($file){
+	     $path = '../../files/'.$file;
+	  
+	  if(is_file($path)){
+	    header('Content-Type: application/force-download');
+	    header('Content-Disposition: attachment; filename='.$file);
+	    header('Content-Transfer-Encoding: binary');
+	    header('Content-Length: '.filesize($path));
+
+	    readfile($path);
+	  }
+	  }else{
+	    exit();
+	    }
+	    
+	   }
+	   }//end if escalafones
+	   
+	   }else{
+	   
+        mysqli_error($conn);
+	   }
+}
+
 
 ///////////////////////////////// SECCION ESCALAFONES //////////////////////////////////
 /*
@@ -1521,6 +1696,7 @@ function escalafones($conn){
 
 		echo "</table>";
 		echo "<br>";
+		echo '<a href="gen_excel.php?name=escalafones"><button class="btn btn-default"><span class="pull-center "><img src="../../icons/mimetypes/application-x-gnumeric.png"  class="img-reponsive img-rounded"> Bajar a Excel </button></a><hr>';
 		echo '<button type="button" class="btn btn-primary">Cantidad de Registros:  ' .$count; echo '</button>';
 		echo '</div>';
 		}else{
@@ -1745,6 +1921,7 @@ function organismos($conn){
 
 		echo "</table>";
 		echo "<br>";
+		echo '<a href="gen_excel.php?name=organismos"><button class="btn btn-default"><span class="pull-center "><img src="../../icons/mimetypes/application-x-gnumeric.png"  class="img-reponsive img-rounded"> Bajar a Excel </button></a><hr>';
 		echo '<button type="button" class="btn btn-primary">Cantidad de Registros:  ' .$count; echo '</button>';
 		echo '</div>';
 		}else{
@@ -1966,6 +2143,7 @@ function jurisdicciones($conn){
 
 		echo "</table>";
 		echo "<br>";
+		echo '<a href="gen_excel.php?name=jurisdiccion"><button class="btn btn-default"><span class="pull-center "><img src="../../icons/mimetypes/application-x-gnumeric.png"  class="img-reponsive img-rounded"> Bajar a Excel </button></a><hr>';
 		echo '<button type="button" class="btn btn-primary">Cantidad de Registros:  ' .$count; echo '</button>';
 		echo '</div>';
 		}else{
@@ -2188,6 +2366,7 @@ function niveles($conn){
 
 		echo "</table>";
 		echo "<br>";
+		echo '<a href="gen_excel.php?name=niveles"><button class="btn btn-default"><span class="pull-center "><img src="../../icons/mimetypes/application-x-gnumeric.png"  class="img-reponsive img-rounded"> Bajar a Excel </button></a><hr>';
 		echo '<button type="button" class="btn btn-primary">Cantidad de Registros:  ' .$count; echo '</button>';
 		echo '</div>';
 		}else{
