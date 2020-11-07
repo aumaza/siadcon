@@ -254,7 +254,7 @@ $(document).ready(function(){
     </form>
     
      <div class="panel-group" id="accordion">
-  <div class="panel panel-default">
+  <div class="panel panel-success">
     <div class="panel-heading">
       <h4 class="panel-title">
         <a data-toggle="collapse" data-parent="#accordion" href="#collapse5">
