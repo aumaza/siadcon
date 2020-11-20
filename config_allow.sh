@@ -11,3 +11,5 @@ chmod -R 777 logs/
 echo "Permisos en logs cambiados Exitosamente"
 chmod -R 777 registro/gen_pass/
 echo "Permisos en gen_pass cambiados Exitosamente"
+chmod 777 1/contratos/
+echo "Permisos en gen_pass cambiados Exitosamente"

@@ -138,7 +138,7 @@ $(document).ready(function(){
     .sidenav {
       padding-top: 20px;
       background-color: #f1f1f1;
-      height: 150%;
+      height: 100%;
     }
     
     /* Set black background color, white text and some padding */
@@ -269,7 +269,7 @@ $(document).ready(function(){
   </div>
 </div> 
 
-    </div>
+</div>
     <div class="col-sm-10 text-left"> 
       <h1>Bienvenido/a <?php echo $nombre ?></p></h1>
       <a href="main.php" data-toggle="tooltip" data-placement="right" title="Sistema de Administración de Contratos"><button type="button" class="btn btn-default"><img class="img-reponsive img-rounded" src="../../icons/actions/go-home.png" /> Siadcon</button></a><br>

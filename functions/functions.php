@@ -1127,13 +1127,13 @@ function get_file(){
 	  <div class="container">
 	    <div class="row">
 	      <div class="col-sm-8">
-		<div class="panel panel-default">
-		  <div class="panel-heading">
-		    <strong>Seleccione el Archivo a Subir:</strong><br>
-		    <input type="file" name="file" class="btn btn-default"><br>
-		    <button type="submit" class="btn btn-warning navbar-btn" name="submit"><span class="glyphicon glyphicon-cloud-upload"></span> Subir</button>
-		  </div>
-		</div>
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                <strong>Seleccione el Archivo a Subir:</strong><br>
+                <input type="file" name="file" class="btn btn-default"><br>
+                <button type="submit" class="btn btn-warning navbar-btn" name="submit"><span class="glyphicon glyphicon-cloud-upload"></span> Subir</button>
+                </div>
+            </div>
 	      </div>  
 	    </div>
 	  </div>
